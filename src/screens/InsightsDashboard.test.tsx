@@ -66,6 +66,8 @@ const mockSettings: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 function setupMock(leads: Lead[] = mockLeads, settings: AppSettings = mockSettings) {
@@ -82,6 +84,7 @@ function setupMock(leads: Lead[] = mockLeads, settings: AppSettings = mockSettin
     updateLead: vi.fn(),
     deleteLead: vi.fn(),
     updateSettings: vi.fn(),
+    importBackup: vi.fn(),
     dismissStorageError: vi.fn(),
   });
 }

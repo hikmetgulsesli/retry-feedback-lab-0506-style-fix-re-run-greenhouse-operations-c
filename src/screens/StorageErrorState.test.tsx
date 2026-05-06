@@ -27,6 +27,8 @@ const mockSettings: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 function setupMock(onDismiss?: () => void, error?: string) {
@@ -43,6 +45,7 @@ function setupMock(onDismiss?: () => void, error?: string) {
     updateLead: vi.fn(),
     deleteLead: vi.fn(),
     updateSettings: vi.fn(),
+    importBackup: vi.fn(),
     dismissStorageError: mockDismissStorageError,
   });
   
@@ -127,6 +130,7 @@ describe('StorageErrorState', () => {
       updateLead: vi.fn(),
       deleteLead: vi.fn(),
       updateSettings: vi.fn(),
+      importBackup: vi.fn(),
       dismissStorageError: mockDismissStorageError,
     });
     

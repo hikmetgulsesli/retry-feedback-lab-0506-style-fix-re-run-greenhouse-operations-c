@@ -1,21 +1,26 @@
 // AUTO-GENERATED from Stitch — DO NOT modify layout or CSS
 // Screen: Profile Panel
-// 
+//
 // AGENT INSTRUCTIONS:
 // 1. DO NOT change className values or layout structure
 // 2. Add useState for dynamic values (replace hardcoded text)
 // 3. Add onClick/onChange handlers to interactive elements
 // 4. Replace placeholder data with props/state
 
-import { useState } from "react";
 import { useAppContext } from "../contexts/AppContext";
 
 interface ProfilePanelProps {}
 
 export function ProfilePanel(props: ProfilePanelProps) {
-  const { navigate, navigateToLead } = useAppContext();
-  const [newLeadToggle, setNewLeadToggle] = useState(true);
-  const [actionToggle, setActionToggle] = useState(true);
+  const { navigate, navigateToLead, settings, updateSettings } = useAppContext();
+
+  const handleToggleNewLead = (checked: boolean) => {
+    updateSettings({ notifyNewLead: checked });
+  };
+
+  const handleToggleAction = (checked: boolean) => {
+    updateSettings({ notifyActionRequired: checked });
+  };
 
   return (
     <>
@@ -150,7 +155,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Alert on pipeline entry</span>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={newLeadToggle} onChange={e => setNewLeadToggle(e.target.checked)} className="sr-only peer" type="checkbox" />
+      <input checked={settings.notifyNewLead} onChange={e => handleToggleNewLead(e.target.checked)} className="sr-only peer" type="checkbox" />
       <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
       </label>
       </div>
@@ -161,7 +166,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Critical system alerts</span>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={actionToggle} onChange={e => setActionToggle(e.target.checked)} className="sr-only peer" type="checkbox" />
+      <input checked={settings.notifyActionRequired} onChange={e => handleToggleAction(e.target.checked)} className="sr-only peer" type="checkbox" />
       <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
       </label>
       </div>

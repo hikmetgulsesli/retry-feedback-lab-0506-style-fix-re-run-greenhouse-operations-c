@@ -24,6 +24,8 @@ export interface AppSettings {
   density: 'compact' | 'standard' | 'comfortable';
   currency: 'USD' | 'EUR' | 'GBP';
   darkMode: boolean;
+  notifyNewLead: boolean;
+  notifyActionRequired: boolean;
 }
 
 export interface AppState {
@@ -38,6 +40,8 @@ export const DEFAULT_SETTINGS: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 export const DEFAULT_LEADS: Lead[] = [

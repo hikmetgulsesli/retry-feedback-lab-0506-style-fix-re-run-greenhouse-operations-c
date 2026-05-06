@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
-import type { Lead, LeadStatus, AppSettings, Screen } from '../types/domain';
-import { generateLeadId } from '../types/domain';
+import type { Lead, LeadStatus, AppSettings, Screen, AppState } from '../types/domain';
+import { generateLeadId, DEFAULT_SETTINGS } from '../types/domain';
 import { loadState, saveState } from '../utils/storage';
 
 export interface AppContextValue {
@@ -16,6 +16,7 @@ export interface AppContextValue {
   updateLead: (id: string, updates: Partial<Lead>) => void;
   deleteLead: (id: string) => void;
   updateSettings: (settings: Partial<AppSettings>) => void;
+  importBackup: (state: AppState) => void;
   dismissStorageError: () => void;
 }
 
@@ -36,7 +37,8 @@ type Action =
   | { type: 'DELETE_LEAD'; id: string }
   | { type: 'UPDATE_SETTINGS'; settings: Partial<AppSettings> }
   | { type: 'DISMISS_STORAGE_ERROR' }
-  | { type: 'HYDRATE'; state: Partial<State> };
+  | { type: 'HYDRATE'; state: Partial<State> }
+  | { type: 'IMPORT_STATE'; state: Partial<State> };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -68,6 +70,8 @@ function reducer(state: State, action: Action): State {
       return { ...state, storageError: null };
     case 'HYDRATE':
       return { ...state, ...action.state };
+    case 'IMPORT_STATE':
+      return { ...state, ...action.state };
     default:
       return state;
   }
@@ -78,7 +82,7 @@ const AppContext = createContext<AppContextValue | null>(null);
 const initialState: State = {
   screen: 'leads',
   leads: [],
-  settings: { density: 'compact', currency: 'USD', darkMode: true },
+  settings: { ...DEFAULT_SETTINGS },
   selectedLeadId: null,
   storageError: null,
   lastSyncAt: null,
@@ -142,6 +146,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: 'UPDATE_SETTINGS', settings });
   }, []);
 
+  const importBackup = useCallback((backup: AppState) => {
+    dispatch({ type: 'IMPORT_STATE', state: { leads: backup.leads, settings: backup.settings, lastSyncAt: backup.lastSyncAt } });
+  }, []);
+
   const dismissStorageError = useCallback(() => {
     dispatch({ type: 'DISMISS_STORAGE_ERROR' });
   }, []);
@@ -160,9 +168,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updateLead,
       deleteLead,
       updateSettings,
+      importBackup,
       dismissStorageError,
     }),
-    [state, navigate, navigateToLead, addLead, updateLead, deleteLead, updateSettings, dismissStorageError]
+    [state, navigate, navigateToLead, addLead, updateLead, deleteLead, updateSettings, importBackup, dismissStorageError]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
