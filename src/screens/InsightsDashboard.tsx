@@ -7,11 +7,34 @@
 // 3. Add onClick/onChange handlers to interactive elements
 // 4. Replace placeholder data with props/state
 
-import { useState } from "react";
+import { useMemo } from "react";
+import { useAppContext } from "../contexts/AppContext";
+import { formatCurrency } from "../types/domain";
 
 interface InsightsDashboardProps {}
 
 export function InsightsDashboard(props: InsightsDashboardProps) {
+  const { leads, settings, navigate, navigateToLead } = useAppContext();
+
+  const totalPipeline = useMemo(() => leads.reduce((sum, l) => sum + l.estimatedValue, 0), [leads]);
+  const conversionRate = useMemo(() => {
+    if (leads.length === 0) return 0;
+    return Math.round((leads.filter(l => l.status === "Closed Won").length / leads.length) * 100 * 10) / 10;
+  }, [leads]);
+  const activeLeads = useMemo(() => leads.filter(l => l.status !== "Closed Won" && l.status !== "Closed Lost").length, [leads]);
+  const wonCount = useMemo(() => leads.filter(l => l.status === "Closed Won").length, [leads]);
+  const lostCount = useMemo(() => leads.filter(l => l.status === "Closed Lost").length, [leads]);
+
+  const funnel = useMemo(() => {
+    const stages = ["Initial Contact", "Qualified", "Proposal Sent", "Negotiation"];
+    return stages.map(name => ({
+      name,
+      count: leads.filter(l => l.status === name).length,
+    }));
+  }, [leads]);
+
+  const maxFunnel = Math.max(1, ...funnel.map(f => f.count));
+
   return (
     <>
       {/* SideNavBar */}
@@ -23,30 +46,30 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <span className="font-body-sm text-body-sm text-on-surface-variant">Operation Console</span>
       </div>
       </div>
-      <button className="w-full h-8 mb-lg bg-primary-container text-on-primary-container font-h2 text-h2 rounded flex items-center justify-center gap-xs hover:bg-opacity-90 transition-colors">
+      <button onClick={() => navigateToLead(null)} className="w-full h-8 mb-lg bg-primary-container text-on-primary-container font-h2 text-h2 rounded flex items-center justify-center gap-xs hover:bg-opacity-90 transition-colors cursor-pointer">
       <span className="material-symbols-outlined text-[18px]">add</span>
                   New Lead
               </button>
       <div className="flex flex-col gap-xs flex-1">
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("leads")} className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" data-icon="group">group</span>
                       Leads
                   </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("pipeline")} className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" data-icon="account_tree">account_tree</span>
                       Pipeline
                   </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" role="button">
       <span className="material-symbols-outlined" data-icon="monitoring">monitoring</span>
                       Insights
                   </a>
-      <a className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 mt-auto" href="#">
+      <a onClick={() => navigate("settings")} className="flex items-center gap-md px-md py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 mt-auto cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" data-icon="settings">settings</span>
                       Settings
                   </a>
       </div>
       <div className="mt-lg pt-lg border-t border-outline-variant flex items-center gap-sm">
-      <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant" data-alt="A close up portrait of a male professional wearing glasses in a subtly lit modern office space. The lighting is cool and slightly dramatic, fitting a corporate or tech environment. The image is high resolution with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_puVYJeX1bjDdxWf0kQ7Q34BuCuD12or3d6ddKSDbR9TJndvaC3Ye2gnxzlnIhk8M_lPn4XwHAbpvFW3mgHO5VdnUlPRn8BKgavKvSajQtMMTVx-Kmvt9v9QHTe_9LV9jaQ_3y5fjg2vQ2yf3Vw1DaUEILNtH-XfUK1zrnYz34ZOFHpvISeOR0TJCkKTzIu5y4V1GpEe-uLBulKYhCgAGlrCiAreYItM0KAnympDXBFeh73P_IBK-nt-Dz2IL6gdU5c1i36q9w1U4" />
+      <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_puVYJeX1bjDdxWf0kQ7Q34BuCuD12or3d6ddKSDbR9TJndvaC3Ye2gnxzlnIhk8M_lPn4XwHAbpvFW3mgHO5VdnUlPRn8BKgavKvSajQtMMTVx-Kmvt9v9QHTe_9LV9jaQ_3y5fjg2vQ2yf3Vw1DaUEILNtH-XfUK1zrnYz34ZOFHpvISeOR0TJCkKTzIu5y4V1GpEe-uLBulKYhCgAGlrCiAreYItM0KAnympDXBFeh73P_IBK-nt-Dz2IL6gdU5c1i36q9w1U4" />
       <div className="flex flex-col">
       <span className="font-body-md text-body-md text-on-surface">Admin User</span>
       <span className="font-body-sm text-body-sm text-on-surface-variant">System Operator</span>
@@ -93,7 +116,7 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <span className="material-symbols-outlined text-primary text-[18px]">payments</span>
       </div>
       <div className="flex items-end gap-sm">
-      <span className="font-display text-display text-on-surface">$1.24M</span>
+      <span className="font-display text-display text-on-surface">{formatCurrency(totalPipeline, settings.currency)}</span>
       <span className="font-mono-data text-mono-data text-primary flex items-center"><span className="material-symbols-outlined text-[14px]">arrow_upward</span> 12.5%</span>
       </div>
       </div>
@@ -104,7 +127,7 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <span className="material-symbols-outlined text-secondary text-[18px]">percent</span>
       </div>
       <div className="flex items-end gap-sm">
-      <span className="font-display text-display text-on-surface">24.8%</span>
+      <span className="font-display text-display text-on-surface">{conversionRate}%</span>
       <span className="font-mono-data text-mono-data text-on-surface-variant flex items-center"><span className="material-symbols-outlined text-[14px]">horizontal_rule</span> 0.0%</span>
       </div>
       </div>
@@ -115,7 +138,7 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <span className="material-symbols-outlined text-tertiary text-[18px]">groups</span>
       </div>
       <div className="flex items-end gap-sm">
-      <span className="font-display text-display text-on-surface">842</span>
+      <span className="font-display text-display text-on-surface">{activeLeads}</span>
       <span className="font-mono-data text-mono-data text-error flex items-center"><span className="material-symbols-outlined text-[14px]">arrow_downward</span> 3.2%</span>
       </div>
       </div>
@@ -141,24 +164,20 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       </div>
       <div className="flex-1 relative border-b border-l border-outline-variant flex items-end justify-around pb-sm pt-xl px-sm">
       {/* Simulated Bar Chart */}
-      <div className="w-16 bg-primary-container bg-opacity-20 hover:bg-opacity-40 border border-primary-container rounded-t relative group flex justify-center h-[90%]">
-      <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">842</div>
-      </div>
-      <div className="w-16 bg-primary-container bg-opacity-40 hover:bg-opacity-60 border border-primary-container rounded-t relative group flex justify-center h-[60%]">
-      <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">450</div>
-      </div>
-      <div className="w-16 bg-primary-container bg-opacity-60 hover:bg-opacity-80 border border-primary-container rounded-t relative group flex justify-center h-[40%]">
-      <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">310</div>
-      </div>
-      <div className="w-16 bg-primary-container bg-opacity-80 hover:bg-opacity-100 border border-primary-container rounded-t relative group flex justify-center h-[25%]">
-      <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">209</div>
-      </div>
+      {funnel.map((stage, i) => {
+        const pct = maxFunnel > 0 ? (stage.count / maxFunnel) * 100 : 0;
+        const opacity = [20, 40, 60, 80][i] ?? 20;
+        return (
+          <div key={stage.name} className={`w-16 bg-primary-container bg-opacity-${opacity} hover:bg-opacity-${Math.min(opacity + 20, 100)} border border-primary-container rounded-t relative group flex justify-center`} style={{ height: `${Math.max(pct, 5)}%` }}>
+            <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">{stage.count}</div>
+          </div>
+        );
+      })}
       </div>
       <div className="flex justify-around mt-sm font-label-caps text-label-caps text-on-surface-variant px-sm">
-      <span>LEADS</span>
-      <span>QUALIFIED</span>
-      <span>PROPOSAL</span>
-      <span>WON</span>
+      {funnel.map(stage => (
+        <span key={stage.name}>{stage.name.toUpperCase().split(" ")[0]}</span>
+      ))}
       </div>
       </div>
       {/* Secondary Chart: Win/Loss Ratio */}
@@ -168,20 +187,20 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       </div>
       <div className="flex-1 flex items-center justify-center relative">
       {/* Simulated Donut Chart using CSS conic-gradient and mask */}
-      <div className="w-40 h-40 rounded-full" style={{background: "conic-gradient(#2563EB 0% 68%, #334155 68% 100%)", maskImage: "radial-gradient(circle, transparent 55%, black 56%)", WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 56%)"}}></div>
+      <div className="w-40 h-40 rounded-full" style={{background: `conic-gradient(#2563EB 0% ${wonCount}%, #334155 ${wonCount}% 100%)`, maskImage: "radial-gradient(circle, transparent 55%, black 56%)", WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 56%)"}}></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-      <span className="font-display text-display text-on-surface">68%</span>
+      <span className="font-display text-display text-on-surface">{leads.length > 0 ? Math.round((wonCount / leads.length) * 100) : 0}%</span>
       <span className="font-label-caps text-label-caps text-on-surface-variant">WIN RATE</span>
       </div>
       </div>
       <div className="mt-md flex justify-center gap-lg">
       <div className="flex items-center gap-xs">
       <div className="w-3 h-3 rounded-full bg-primary-container"></div>
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Won (209)</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">Won ({wonCount})</span>
       </div>
       <div className="flex items-center gap-xs">
       <div className="w-3 h-3 rounded-full bg-[#334155]"></div>
-      <span className="font-body-sm text-body-sm text-on-surface-variant">Lost (98)</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">Lost ({lostCount})</span>
       </div>
       </div>
       </div>
