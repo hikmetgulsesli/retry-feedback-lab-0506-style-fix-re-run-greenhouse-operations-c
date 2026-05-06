@@ -82,10 +82,10 @@ export function LeadsDashboard(props: LeadsDashboardProps) {
       <header className="bg-surface-container dark:bg-surface-container docked top-0 w-full border-b border-outline-variant dark:border-outline-variant flat no shadows flex justify-between items-center h-16 px-lg shrink-0 md:hidden z-10">
       <h1 className="font-h1 text-h1 text-primary dark:text-primary tracking-tight">Setfarm Greenhouse</h1>
       <div className="flex items-center gap-md text-on-surface-variant dark:text-on-surface-variant">
-      <button className="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Profile" className="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('settings')} aria-label="Settings" className="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">help_outline</span>
       </button>
       </div>

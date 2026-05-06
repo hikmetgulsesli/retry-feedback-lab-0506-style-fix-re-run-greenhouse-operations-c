@@ -112,6 +112,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     });
     if (!result.success) {
       dispatch({ type: 'HYDRATE', state: { storageError: result.error || 'Storage write failed' } });
+    } else {
+      dispatch({ type: 'HYDRATE', state: { lastSyncAt: result.lastSyncAt || new Date().toISOString() } });
     }
   }, [state.leads, state.settings]);
 

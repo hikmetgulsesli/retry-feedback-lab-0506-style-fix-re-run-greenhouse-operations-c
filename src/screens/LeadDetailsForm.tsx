@@ -102,7 +102,7 @@ export function LeadDetailsForm(props: LeadDetailsFormProps) {
       </li>
       </ul>
       <div className="mt-auto flex items-center pt-md border-t border-outline-variant">
-      <div className="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden shrink-0">
+      <div onClick={() => navigate('profile')} className="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden shrink-0 cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" role="button" tabIndex={0} aria-label="Open profile">
       <img alt="Operator Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYELhwMolQsmAFFYfHSjFrWiEqw0BjpfsY3oD87Mq9G_Nv2TVKXxThA19MbN7dcONu_2lv4pfqIiI_wjAfX8Yr2R-ImkSGjxS_r1iCDXzp3NM-syR0lci5i7Dwa-8FFl1rSvF9GZvktbvCvynoB7_DM8Iye80MZ535FRzkK2zNpjGS0FhwLm0Eug063wwq6NIzG_JZmVlPpUf4Af_utWESybm6ylPu1blgKWbv-hmuvsRFyfstpKFb-NbDcrXicN7rea2TEkPrHosb" />
       </div>
       <div className="ml-sm">
@@ -116,13 +116,13 @@ export function LeadDetailsForm(props: LeadDetailsFormProps) {
       <header className="bg-surface-container border-b border-outline-variant flex justify-between items-center h-16 px-lg w-full shrink-0 md:hidden">
       <h1 className="font-display text-display text-primary tracking-tight">Setfarm Greenhouse</h1>
       <div className="flex items-center space-x-md">
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="help_outline">help_outline</span>
       </button>
-      <div className="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+      <div onClick={() => navigate('profile')} className="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" role="button" tabIndex={0} aria-label="Open profile">
       <img alt="Operator Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVxtk2qg46xnZ2KYKCrFeVCckGzYajudimFM2JEnvgTSb2Yk4Tw9JQYAbXGQamilR96x6osxw4br2x3Aue0mha9uqdEpBjQHJZ9A5fcubuRna31C698euPS-s6wooLfCCPnsFz8DrSwlQYhYXFIDHkfXY9fx0_tGQp1KvFwedS9jocwzN9YI4Q4nUcXuwIm6l6NQzkqDvXurUFmcm8qiMIxnZYVBT6YOKgCl1s8lL-9rZOD9shxqOjdwV0y5GsF-PEpaKLe77BfHra" />
       </div>
       </div>
@@ -131,12 +131,12 @@ export function LeadDetailsForm(props: LeadDetailsFormProps) {
       <div className="flex items-center space-x-md">
       <div className="relative flex items-center">
       <span className="material-symbols-outlined absolute left-sm text-on-surface-variant text-[20px]" data-icon="search">search</span>
-      <input className="bg-surface-dim border border-outline-variant rounded h-[32px] pl-[32px] pr-sm text-body-sm focus:border-primary-container focus:ring-0 w-64 text-on-surface" placeholder="Search..." type="text" />
+      <input readOnly className="bg-surface-dim border border-outline-variant rounded h-[32px] pl-[32px] pr-sm text-body-sm focus:border-primary-container focus:ring-0 w-64 text-on-surface" placeholder="Search..." type="text" />
       </div>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="help_outline">help_outline</span>
       </button>
       </div>
