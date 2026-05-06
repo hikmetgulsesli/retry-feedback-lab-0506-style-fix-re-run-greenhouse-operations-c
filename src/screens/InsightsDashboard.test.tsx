@@ -66,6 +66,8 @@ const mockSettings: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 function setupMock(leads: Lead[] = mockLeads, settings: AppSettings = mockSettings) {

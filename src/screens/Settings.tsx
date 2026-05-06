@@ -1,6 +1,6 @@
 // AUTO-GENERATED from Stitch — DO NOT modify layout or CSS
 // Screen: Settings
-// 
+//
 // AGENT INSTRUCTIONS:
 // 1. DO NOT change className values or layout structure
 // 2. Add useState for dynamic values (replace hardcoded text)
@@ -9,22 +9,97 @@
 
 import { useState } from "react";
 import { useAppContext } from "../contexts/AppContext";
+import { exportState, importState, clearState } from "../utils/storage";
 
 interface SettingsProps {}
 
+type SettingsTab = "display" | "notifications" | "data";
+
 export function Settings(props: SettingsProps) {
-  const { settings, updateSettings, navigate, navigateToLead } = useAppContext();
+  const { settings, updateSettings, navigate, navigateToLead, leads } = useAppContext();
+  const [activeTab, setActiveTab] = useState<SettingsTab>("display");
   const [localDensity, setLocalDensity] = useState(settings.density);
   const [localCurrency, setLocalCurrency] = useState(settings.currency);
+  const [localNotifyNewLead, setLocalNotifyNewLead] = useState(settings.notifyNewLead);
+  const [localNotifyAction, setLocalNotifyAction] = useState(settings.notifyActionRequired);
+  const [importError, setImportError] = useState<string | null>(null);
+  const [importSuccess, setImportSuccess] = useState(false);
 
   const handleSave = () => {
-    updateSettings({ density: localDensity, currency: localCurrency });
+    updateSettings({
+      density: localDensity,
+      currency: localCurrency,
+      notifyNewLead: localNotifyNewLead,
+      notifyActionRequired: localNotifyAction,
+    });
   };
 
   const handleDiscard = () => {
     setLocalDensity(settings.density);
     setLocalCurrency(settings.currency);
+    setLocalNotifyNewLead(settings.notifyNewLead);
+    setLocalNotifyAction(settings.notifyActionRequired);
+    setImportError(null);
+    setImportSuccess(false);
   };
+
+  const hasChanges =
+    localDensity !== settings.density ||
+    localCurrency !== settings.currency ||
+    localNotifyNewLead !== settings.notifyNewLead ||
+    localNotifyAction !== settings.notifyActionRequired;
+
+  const handleExport = () => {
+    const blob = new Blob([exportState({ leads, settings, lastSyncAt: new Date().toISOString() })], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `setfarm-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result as string;
+      const imported = importState(text);
+      if (imported) {
+        updateSettings(imported.settings);
+        setImportError(null);
+        setImportSuccess(true);
+        setTimeout(() => setImportSuccess(false), 3000);
+      } else {
+        setImportError("Invalid backup file format.");
+        setImportSuccess(false);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  };
+
+  const handleReset = () => {
+    if (confirm("Are you sure you want to reset all data? This will clear all leads and restore default settings.")) {
+      clearState();
+      window.location.reload();
+    }
+  };
+
+  const TabButton = ({ tab, icon, label }: { tab: SettingsTab; icon: string; label: string }) => (
+    <button
+      onClick={() => setActiveTab(tab)}
+      className={`flex items-center gap-sm px-md py-sm rounded font-body-md text-body-md flex-1 lg:flex-none justify-center lg:justify-start transition-colors ${
+        activeTab === tab
+          ? "text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary"
+          : "text-on-surface-variant hover:bg-surface-container-highest"
+      }`}
+    >
+      <span className="material-symbols-outlined text-[20px]" data-icon={icon}>{icon}</span>
+      <span className="hidden lg:inline">{label}</span>
+    </button>
+  );
 
   return (
     <>
@@ -84,23 +159,15 @@ export function Settings(props: SettingsProps) {
       {/* Settings Navigation (Bento Grid Style) */}
       <div className="lg:col-span-3 space-y-sm">
       <nav className="bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-row lg:flex-col p-xs gap-xs sticky top-4">
-      <button className="flex items-center gap-sm px-md py-sm rounded text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary flex-1 lg:flex-none justify-center lg:justify-start">
-      <span className="material-symbols-outlined text-[20px]" data-icon="display_settings">display_settings</span>
-      <span className="hidden lg:inline">Display</span>
-      </button>
-      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest transition-colors flex-1 lg:flex-none justify-center lg:justify-start">
-      <span className="material-symbols-outlined text-[20px]" data-icon="notifications_active">notifications_active</span>
-      <span className="hidden lg:inline">Notifications</span>
-      </button>
-      <button className="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest transition-colors flex-1 lg:flex-none justify-center lg:justify-start">
-      <span className="material-symbols-outlined text-[20px]" data-icon="database">database</span>
-      <span className="hidden lg:inline">Data</span>
-      </button>
+        <TabButton tab="display" icon="display_settings" label="Display" />
+        <TabButton tab="notifications" icon="notifications_active" label="Notifications" />
+        <TabButton tab="data" icon="database" label="Data" />
       </nav>
       </div>
       {/* Settings Content */}
       <div className="lg:col-span-9 space-y-lg">
-      {/* Display Section */}
+
+      {activeTab === "display" && (
       <section className="bg-surface-container border border-outline-variant rounded-xl p-md md:p-lg">
       <h3 className="font-h1 text-h1 text-on-background mb-lg flex items-center gap-sm">
       <span className="material-symbols-outlined text-primary" data-icon="display_settings">display_settings</span>
@@ -161,12 +228,87 @@ export function Settings(props: SettingsProps) {
       </div>
       </div>
       </section>
+      )}
+
+      {activeTab === "notifications" && (
+      <section className="bg-surface-container border border-outline-variant rounded-xl p-md md:p-lg">
+      <h3 className="font-h1 text-h1 text-on-background mb-lg flex items-center gap-sm">
+      <span className="material-symbols-outlined text-primary" data-icon="notifications_active">notifications_active</span>
+                                      Notification Preferences
+                                  </h3>
+      <div className="space-y-xl">
+      {/* New Lead Alert */}
+      <div className="flex items-center justify-between bg-surface p-sm rounded border border-outline-variant">
+      <div className="flex flex-col">
+      <span className="font-body-md text-body-md text-on-background">New Lead Alerts</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">Alert when a new lead enters the pipeline.</span>
+      </div>
+      <label className="relative inline-flex items-center cursor-pointer">
+      <input checked={localNotifyNewLead} onChange={e => setLocalNotifyNewLead(e.target.checked)} className="sr-only peer" type="checkbox" />
+      <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
+      </label>
+      </div>
+      {/* Action Required Alert */}
+      <div className="flex items-center justify-between bg-surface p-sm rounded border border-outline-variant">
+      <div className="flex flex-col">
+      <span className="font-body-md text-body-md text-on-background">Action Required Alerts</span>
+      <span className="font-body-sm text-body-sm text-on-surface-variant">Critical system alerts requiring attention.</span>
+      </div>
+      <label className="relative inline-flex items-center cursor-pointer">
+      <input checked={localNotifyAction} onChange={e => setLocalNotifyAction(e.target.checked)} className="sr-only peer" type="checkbox" />
+      <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
+      </label>
+      </div>
+      </div>
+      </section>
+      )}
+
+      {activeTab === "data" && (
+      <section className="bg-surface-container border border-outline-variant rounded-xl p-md md:p-lg">
+      <h3 className="font-h1 text-h1 text-on-background mb-lg flex items-center gap-sm">
+      <span className="material-symbols-outlined text-primary" data-icon="database">database</span>
+                                      Data Management
+                                  </h3>
+      <div className="space-y-xl">
+      <div>
+      <h4 className="font-h2 text-h2 text-on-background">Export Data</h4>
+      <p className="font-body-sm text-body-sm text-on-surface-variant mb-sm">Download a JSON backup of all leads and settings.</p>
+      <button onClick={handleExport} className="px-md h-8 bg-primary-container text-white rounded-DEFAULT font-h2 text-h2 hover:opacity-90 transition-opacity focus:ring-2 focus:ring-primary focus:outline-none focus:ring-offset-2 focus:ring-offset-background cursor-pointer">
+      <span className="material-symbols-outlined text-[18px] mr-xs inline-block align-text-bottom" data-icon="download">download</span>
+                                      Export Backup
+                                  </button>
+      </div>
+      <hr className="border-outline-variant" />
+      <div>
+      <h4 className="font-h2 text-h2 text-on-background">Import Data</h4>
+      <p className="font-body-sm text-body-sm text-on-surface-variant mb-sm">Restore from a previous JSON backup file.</p>
+      <label className="inline-block px-md h-8 border border-outline-variant rounded-DEFAULT font-h2 text-h2 text-on-background hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary focus:outline-none cursor-pointer">
+      <span className="material-symbols-outlined text-[18px] mr-xs inline-block align-text-bottom" data-icon="upload">upload</span>
+                                      Import Backup
+      <input type="file" accept=".json,application/json" onChange={handleImport} className="sr-only" />
+      </label>
+      {importError && <p className="mt-xs text-error font-body-sm text-body-sm">{importError}</p>}
+      {importSuccess && <p className="mt-xs text-primary font-body-sm text-body-sm">Import successful! Settings restored.</p>}
+      </div>
+      <hr className="border-outline-variant" />
+      <div>
+      <h4 className="font-h2 text-h2 text-on-background">Reset Application</h4>
+      <p className="font-body-sm text-body-sm text-on-surface-variant mb-sm">Clear all data and restore default settings. This cannot be undone.</p>
+      <button onClick={handleReset} className="px-md h-8 border border-error text-error rounded-DEFAULT font-h2 text-h2 hover:bg-error-container/20 transition-colors focus:ring-2 focus:ring-error focus:outline-none focus:ring-offset-2 focus:ring-offset-background cursor-pointer">
+      <span className="material-symbols-outlined text-[18px] mr-xs inline-block align-text-bottom" data-icon="restart_alt">restart_alt</span>
+                                      Reset All Data
+                                  </button>
+      </div>
+      </div>
+      </section>
+      )}
+
       {/* Actions Bar */}
       <div className="flex justify-end gap-sm pt-md">
       <button onClick={handleDiscard} className="px-md h-8 border border-outline-variant rounded-DEFAULT font-h2 text-h2 text-on-background hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary focus:outline-none cursor-pointer">
                                       Discard Changes
                                   </button>
-      <button onClick={handleSave} className="px-md h-8 bg-primary-container text-white rounded-DEFAULT font-h2 text-h2 hover:opacity-90 transition-opacity focus:ring-2 focus:ring-primary focus:outline-none focus:ring-offset-2 focus:ring-offset-background cursor-pointer">
+      <button onClick={handleSave} disabled={!hasChanges} className={`px-md h-8 rounded-DEFAULT font-h2 text-h2 focus:ring-2 focus:ring-primary focus:outline-none focus:ring-offset-2 focus:ring-offset-background cursor-pointer ${hasChanges ? 'bg-primary-container text-white hover:opacity-90 transition-opacity' : 'bg-surface-dim text-on-surface-variant cursor-not-allowed'}`}>
                                       Save Preferences
                                   </button>
       </div>

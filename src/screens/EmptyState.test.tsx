@@ -11,6 +11,8 @@ const mockSettings: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 function setupMock() {

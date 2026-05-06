@@ -17,7 +17,7 @@ describe('storage', () => {
   it('saves and loads state correctly', () => {
     const state: AppState = {
       leads: [],
-      settings: { density: 'standard', currency: 'EUR', darkMode: true },
+      settings: { density: 'standard', currency: 'EUR', darkMode: true, notifyNewLead: true, notifyActionRequired: true },
       lastSyncAt: '2024-01-01T00:00:00Z',
     };
     const result = saveState(state);
@@ -32,7 +32,7 @@ describe('storage', () => {
   it('exportState returns valid JSON', () => {
     const state: AppState = {
       leads: [],
-      settings: { density: 'compact', currency: 'USD', darkMode: true },
+      settings: { density: 'compact', currency: 'USD', darkMode: true, notifyNewLead: true, notifyActionRequired: true },
       lastSyncAt: '2024-01-01T00:00:00Z',
     };
     const json = exportState(state);
@@ -44,7 +44,7 @@ describe('storage', () => {
   it('importState restores valid state', () => {
     const state: AppState = {
       leads: [{ id: 'test', company: 'Test', contactName: 'T', contactEmail: '', contactPhone: '', estimatedValue: 100, status: 'Initial Contact', lastContactDate: '2024-01-01', notes: '', createdAt: '2024-01-01', updatedAt: '2024-01-01' }],
-      settings: { density: 'comfortable', currency: 'GBP', darkMode: true },
+      settings: { density: 'comfortable', currency: 'GBP', darkMode: true, notifyNewLead: true, notifyActionRequired: true },
       lastSyncAt: '2024-01-01T00:00:00Z',
     };
     const json = exportState(state);
@@ -59,7 +59,7 @@ describe('storage', () => {
   });
 
   it('clearState removes storage key', () => {
-    saveState({ leads: [], settings: { density: 'compact', currency: 'USD', darkMode: true }, lastSyncAt: null });
+    saveState({ leads: [], settings: { density: 'compact', currency: 'USD', darkMode: true, notifyNewLead: true, notifyActionRequired: true }, lastSyncAt: null });
     clearState();
     expect(localStorage.getItem('setfarm-greenhouse-ops-v1')).toBeNull();
   });

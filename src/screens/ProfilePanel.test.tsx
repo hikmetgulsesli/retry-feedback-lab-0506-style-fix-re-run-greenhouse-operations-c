@@ -11,6 +11,8 @@ const mockSettings: AppSettings = {
   density: 'compact',
   currency: 'USD',
   darkMode: true,
+  notifyNewLead: true,
+  notifyActionRequired: true,
 };
 
 function setupMock() {
@@ -26,7 +28,9 @@ function setupMock() {
     addLead: vi.fn(),
     updateLead: vi.fn(),
     deleteLead: vi.fn(),
-    updateSettings: vi.fn(),
+    updateSettings: vi.fn((partial) => {
+      Object.assign(mockSettings, partial);
+    }),
     dismissStorageError: vi.fn(),
   });
 }
@@ -96,25 +100,55 @@ describe('ProfilePanel', () => {
   });
 
   it('toggles New Lead preference', () => {
-    setupMock();
+    const mockUpdate = vi.fn();
+    vi.spyOn(AppContext, 'useAppContext').mockReturnValue({
+      leads: [],
+      settings: mockSettings,
+      navigate: mockNavigate,
+      navigateToLead: mockNavigateToLead,
+      screen: 'profile',
+      selectedLeadId: null,
+      storageError: null,
+      lastSyncAt: new Date().toISOString(),
+      addLead: vi.fn(),
+      updateLead: vi.fn(),
+      deleteLead: vi.fn(),
+      updateSettings: mockUpdate,
+      dismissStorageError: vi.fn(),
+    });
     render(<ProfilePanel />);
     
     const toggle = screen.getAllByRole('checkbox')[0];
     expect(toggle).toBeChecked();
     
     fireEvent.click(toggle);
-    expect(toggle).not.toBeChecked();
+    expect(mockUpdate).toHaveBeenCalledWith({ notifyNewLead: false });
   });
 
   it('toggles Action Required preference', () => {
-    setupMock();
+    const mockUpdate = vi.fn();
+    vi.spyOn(AppContext, 'useAppContext').mockReturnValue({
+      leads: [],
+      settings: mockSettings,
+      navigate: mockNavigate,
+      navigateToLead: mockNavigateToLead,
+      screen: 'profile',
+      selectedLeadId: null,
+      storageError: null,
+      lastSyncAt: new Date().toISOString(),
+      addLead: vi.fn(),
+      updateLead: vi.fn(),
+      deleteLead: vi.fn(),
+      updateSettings: mockUpdate,
+      dismissStorageError: vi.fn(),
+    });
     render(<ProfilePanel />);
     
     const toggle = screen.getAllByRole('checkbox')[1];
     expect(toggle).toBeChecked();
     
     fireEvent.click(toggle);
-    expect(toggle).not.toBeChecked();
+    expect(mockUpdate).toHaveBeenCalledWith({ notifyActionRequired: false });
   });
 
   it('closes profile panel when close button clicked', () => {

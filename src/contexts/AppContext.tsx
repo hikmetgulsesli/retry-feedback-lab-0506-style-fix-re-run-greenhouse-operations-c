@@ -78,7 +78,7 @@ const AppContext = createContext<AppContextValue | null>(null);
 const initialState: State = {
   screen: 'leads',
   leads: [],
-  settings: { density: 'compact', currency: 'USD', darkMode: true },
+  settings: { density: 'compact', currency: 'USD', darkMode: true, notifyNewLead: true, notifyActionRequired: true },
   selectedLeadId: null,
   storageError: null,
   lastSyncAt: null,
