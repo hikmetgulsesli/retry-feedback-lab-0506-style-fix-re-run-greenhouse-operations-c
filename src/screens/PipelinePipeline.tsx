@@ -78,10 +78,10 @@ export function PipelinePipeline(props: PipelinePipelineProps) {
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
       <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="h-8 bg-surface dark:bg-surface border border-outline-variant rounded pl-xl pr-sm text-body-sm font-body-sm focus:ring-2 focus:ring-primary-container focus:outline-none focus:border-primary-container transition-colors w-64 placeholder-on-surface-variant text-on-surface" placeholder="Search pipeline..." type="text" />
       </div>
-      <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">help_outline</span>
       </button>
       <div onClick={() => navigate('profile')} className="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant ml-sm cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" role="button" tabIndex={0} aria-label="Open profile">

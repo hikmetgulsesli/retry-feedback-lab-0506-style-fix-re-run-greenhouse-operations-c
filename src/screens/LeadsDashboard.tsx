@@ -179,7 +179,7 @@ export function LeadsDashboard(props: LeadsDashboardProps) {
           <div className="flex items-center justify-end gap-xs text-on-surface-variant">
           <button onClick={() => navigateToLead(lead.id)} aria-label="Edit lead" className="p-xs hover:text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-[18px]">edit</span></button>
           <button onClick={() => deleteLead(lead.id)} aria-label="Delete lead" className="p-xs hover:text-error transition-colors cursor-pointer"><span className="material-symbols-outlined text-[18px]">delete</span></button>
-          <button aria-label="More options" className="p-xs hover:text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-[18px]">more_vert</span></button>
+          <button onClick={() => navigateToLead(lead.id)} aria-label="More options" className="p-xs hover:text-primary transition-colors cursor-pointer"><span className="material-symbols-outlined text-[18px]">more_vert</span></button>
           </div>
           </td>
           </tr>
@@ -192,8 +192,8 @@ export function LeadsDashboard(props: LeadsDashboardProps) {
       <div className="bg-surface-container-high border-t border-outline-variant p-sm flex items-center justify-between">
       <span className="font-body-sm text-body-sm text-on-surface-variant px-sm">Showing {filteredLeads.length > 0 ? `1-${filteredLeads.length}` : '0'} of {leads.length}</span>
       <div className="flex items-center gap-xs">
-      <button aria-label="Previous page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span className="material-symbols-outlined text-[18px]">chevron_left</span></button>
-      <button aria-label="Next page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT"><span className="material-symbols-outlined text-[18px]">chevron_right</span></button>
+      <button disabled aria-label="Previous page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span className="material-symbols-outlined text-[18px]">chevron_left</span></button>
+      <button disabled aria-label="Next page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span className="material-symbols-outlined text-[18px]">chevron_right</span></button>
       </div>
       </div>
       </div>

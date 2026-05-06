@@ -34,10 +34,10 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]" style={{fontVariationSettings: "'FILL' 0"}}>search</span>
       <input readOnly className="bg-surface text-on-surface border border-outline-variant rounded h-8 pl-[30px] pr-sm text-body-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none w-64 placeholder:text-on-surface-variant transition-colors" placeholder="Search..." type="text" />
       </div>
-      <button aria-label="Notifications" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>notifications</span>
       </button>
-      <button aria-label="Help" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>help_outline</span>
       </button>
       <button onClick={() => navigate("profile")} className="h-8 w-8 rounded-full overflow-hidden border border-outline-variant focus:ring-2 focus:ring-primary-container focus:outline-none ml-sm relative cursor-pointer">

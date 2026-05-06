@@ -116,10 +116,10 @@ export function LeadDetailsForm(props: LeadDetailsFormProps) {
       <header className="bg-surface-container border-b border-outline-variant flex justify-between items-center h-16 px-lg w-full shrink-0 md:hidden">
       <h1 className="font-display text-display text-primary tracking-tight">Setfarm Greenhouse</h1>
       <div className="flex items-center space-x-md">
-      <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="help_outline">help_outline</span>
       </button>
       <div onClick={() => navigate('profile')} className="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" role="button" tabIndex={0} aria-label="Open profile">
@@ -133,10 +133,10 @@ export function LeadDetailsForm(props: LeadDetailsFormProps) {
       <span className="material-symbols-outlined absolute left-sm text-on-surface-variant text-[20px]" data-icon="search">search</span>
       <input readOnly className="bg-surface-dim border border-outline-variant rounded h-[32px] pl-[32px] pr-sm text-body-sm focus:border-primary-container focus:ring-0 w-64 text-on-surface" placeholder="Search..." type="text" />
       </div>
-      <button aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="help_outline">help_outline</span>
       </button>
       </div>
