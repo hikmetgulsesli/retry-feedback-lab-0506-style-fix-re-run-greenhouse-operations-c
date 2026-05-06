@@ -10,11 +10,23 @@
 import { useMemo } from "react";
 import { useAppContext } from "../contexts/AppContext";
 import { formatCurrency } from "../types/domain";
+import { exportState } from "../utils/storage";
 
 interface InsightsDashboardProps {}
 
 export function InsightsDashboard(props: InsightsDashboardProps) {
   const { leads, settings, navigate, navigateToLead } = useAppContext();
+
+  const handleExport = () => {
+    const data = exportState({ leads, settings, lastSyncAt: new Date().toISOString() });
+    const blob = new Blob([data], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'setfarm-backup.json';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 
   const totalPipeline = useMemo(() => leads.reduce((sum, l) => sum + l.estimatedValue, 0), [leads]);
   const conversionRate = useMemo(() => {
@@ -24,6 +36,7 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
   const activeLeads = useMemo(() => leads.filter(l => l.status !== "Closed Won" && l.status !== "Closed Lost").length, [leads]);
   const wonCount = useMemo(() => leads.filter(l => l.status === "Closed Won").length, [leads]);
   const lostCount = useMemo(() => leads.filter(l => l.status === "Closed Lost").length, [leads]);
+  const winRate = useMemo(() => leads.length > 0 ? Math.round((wonCount / leads.length) * 100) : 0, [leads, wonCount]);
 
   const funnel = useMemo(() => {
     const stages = ["Initial Contact", "Qualified", "Proposal Sent", "Negotiation"];
@@ -82,8 +95,8 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <header className="flex justify-between items-center h-16 px-lg w-full bg-surface-container dark:bg-surface-container border-b border-outline-variant dark:border-outline-variant flat no shadows md:hidden">
       <span className="font-display text-display text-primary dark:text-primary">Setfarm Greenhouse</span>
       <div className="flex gap-sm">
-      <button aria-label="Notifications" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="notifications">notifications</span></button>
-      <button aria-label="Help" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="help_outline">help_outline</span></button>
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full cursor-pointer"><span className="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+      <button onClick={() => navigate('settings')} aria-label="Help" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full cursor-pointer"><span className="material-symbols-outlined" data-icon="help_outline">help_outline</span></button>
       </div>
       </header>
       {/* Dashboard Header */}
@@ -94,11 +107,11 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <p className="font-body-md text-body-md text-on-surface-variant mt-xs">Real-time metrics and conversion tracking.</p>
       </div>
       <div className="flex gap-sm">
-      <button className="h-8 px-md border border-outline-variant text-on-surface font-body-md text-body-md rounded hover:bg-surface-container-highest transition-colors flex items-center gap-xs">
+      <button disabled className="h-8 px-md border border-outline-variant text-on-surface font-body-md text-body-md rounded hover:bg-surface-container-highest transition-colors flex items-center gap-xs cursor-pointer disabled:opacity-50">
       <span className="material-symbols-outlined text-[16px]">calendar_today</span>
                               Last 30 Days
                           </button>
-      <button className="h-8 px-md bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant rounded hover:bg-surface-container-highest transition-colors flex items-center gap-xs">
+      <button onClick={handleExport} className="h-8 px-md bg-surface-container text-on-surface font-body-md text-body-md border border-outline-variant rounded hover:bg-surface-container-highest transition-colors flex items-center gap-xs cursor-pointer">
       <span className="material-symbols-outlined text-[16px]">download</span>
                               Export
                           </button>
@@ -160,15 +173,15 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <div className="card-base p-md lg:col-span-2 flex flex-col">
       <div className="flex justify-between items-center mb-md">
       <h2 className="font-h2 text-h2 text-on-surface">Conversion Funnel</h2>
-      <button aria-label="More options" className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">more_vert</span></button>
+      <button disabled aria-label="More options" className="text-on-surface-variant hover:text-primary transition-colors cursor-pointer disabled:opacity-50"><span className="material-symbols-outlined">more_vert</span></button>
       </div>
       <div className="flex-1 relative border-b border-l border-outline-variant flex items-end justify-around pb-sm pt-xl px-sm">
       {/* Simulated Bar Chart */}
       {funnel.map((stage, i) => {
         const pct = maxFunnel > 0 ? (stage.count / maxFunnel) * 100 : 0;
-        const opacity = [20, 40, 60, 80][i] ?? 20;
+        const opacity = [0.2, 0.4, 0.6, 0.8][i] ?? 0.2;
         return (
-          <div key={stage.name} className={`w-16 bg-primary-container bg-opacity-${opacity} hover:bg-opacity-${Math.min(opacity + 20, 100)} border border-primary-container rounded-t relative group flex justify-center`} style={{ height: `${Math.max(pct, 5)}%` }}>
+          <div key={stage.name} className="w-16 bg-primary-container hover:bg-primary-container/80 border border-primary-container rounded-t relative group flex justify-center" style={{ height: `${Math.max(pct, 5)}%`, opacity }}>
             <div className="absolute -top-6 font-mono-data text-mono-data text-on-surface-variant opacity-0 group-hover:opacity-100">{stage.count}</div>
           </div>
         );
@@ -187,9 +200,9 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       </div>
       <div className="flex-1 flex items-center justify-center relative">
       {/* Simulated Donut Chart using CSS conic-gradient and mask */}
-      <div className="w-40 h-40 rounded-full" style={{background: `conic-gradient(#2563EB 0% ${wonCount}%, #334155 ${wonCount}% 100%)`, maskImage: "radial-gradient(circle, transparent 55%, black 56%)", WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 56%)"}}></div>
+      <div className="w-40 h-40 rounded-full" style={{background: `conic-gradient(#2563EB 0% ${winRate}%, #334155 ${winRate}% 100%)`, maskImage: "radial-gradient(circle, transparent 55%, black 56%)", WebkitMaskImage: "radial-gradient(circle, transparent 55%, black 56%)"}}></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-      <span className="font-display text-display text-on-surface">{leads.length > 0 ? Math.round((wonCount / leads.length) * 100) : 0}%</span>
+      <span className="font-display text-display text-on-surface">{winRate}%</span>
       <span className="font-label-caps text-label-caps text-on-surface-variant">WIN RATE</span>
       </div>
       </div>

@@ -78,13 +78,13 @@ export function PipelinePipeline(props: PipelinePipelineProps) {
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
       <input value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="h-8 bg-surface dark:bg-surface border border-outline-variant rounded pl-xl pr-sm text-body-sm font-body-sm focus:ring-2 focus:ring-primary-container focus:outline-none focus:border-primary-container transition-colors w-64 placeholder-on-surface-variant text-on-surface" placeholder="Search pipeline..." type="text" />
       </div>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">help_outline</span>
       </button>
-      <div className="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant ml-sm cursor-pointer hover:ring-2 hover:ring-primary-container transition-all">
+      <div onClick={() => navigate('profile')} className="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant ml-sm cursor-pointer hover:ring-2 hover:ring-primary-container transition-all" role="button" tabIndex={0} aria-label="Open profile">
       <img alt="Operator Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVEg4SyAzsdvZMrNMyIJdSQOWMzJnYQ5rCHNcrgcALMcVfEQeCSwdTqBOBnQ47hanNc1m5HaFS6Vq55PZsb8zbSWTm3Cs2GHGImYS_Jh1p3wcYqDArb81-zBKwBh2Emi-lFD9lu55Gq7ZxxH3t8xNipjN1g6fmLgWWjU1q4M78KWmYRJXFuhquSo7tKTbiLAVd-viZ6IVfB8mOS7c4OmJXIvhWttRSgQ7WRpKuJghbo0X1n7qyTrsMcuY2EhfoYU30uBiD3HVpKDSI" />
       </div>
       </div>

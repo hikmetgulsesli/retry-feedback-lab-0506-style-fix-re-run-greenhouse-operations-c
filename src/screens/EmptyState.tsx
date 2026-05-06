@@ -69,10 +69,10 @@ export function EmptyState(props: EmptyStateProps) {
       <h1 className="font-display text-display text-primary dark:text-primary tracking-tight">Setfarm Greenhouse</h1>
       </div>
       <div className="flex items-center gap-md">
-      <button className="text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined">help_outline</span>
       </button>
       <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant ml-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX6flVl4GSdL2iWcjxkCQYGR9ZfrIPmeb0kdWn9kMGMMlyPAY9wuwhvPDxVz5iL2W9geE9LUvtgJTGl7KBTA3cNTaffxAU1G8jbr4TtLb6kIJU_oSHpXkPEloc1wpyKpc_6ygjRavpv4oOiJt9nAcQoaZeol-SvNupbY6d8nGt-AMC91IlSqRgBtYMrmgTOfluUBJeqEAkVGf7hBTS5DheIczf97EKZcEH2BkUqtjd3lMPUg7dpRNn6P73rriegPuFv_NvfnYJGk0x" />
@@ -83,13 +83,13 @@ export function EmptyState(props: EmptyStateProps) {
       <div className="flex items-center gap-md">
       <div className="relative">
       <span className="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-      <input className="bg-surface-container border border-outline-variant text-on-surface font-body-sm text-body-sm rounded-DEFAULT py-sm pl-[36px] pr-md h-8 w-64 focus:border-primary-container focus:ring-2 focus:ring-primary-container focus:outline-none transition-colors placeholder:text-outline" placeholder="Search leads..." type="text" />
+      <input readOnly className="bg-surface-container border border-outline-variant text-on-surface font-body-sm text-body-sm rounded-DEFAULT py-sm pl-[36px] pr-md h-8 w-64 focus:border-primary-container focus:ring-2 focus:ring-primary-container focus:outline-none transition-colors placeholder:text-outline" placeholder="Search leads..." type="text" />
       </div>
       <div className="w-[1px] h-6 bg-outline-variant mx-sm"></div>
-      <button className="text-on-surface-variant hover:text-on-surface p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Notifications" className="text-on-surface-variant hover:text-on-surface p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[20px]">notifications</span>
       </button>
-      <button className="text-on-surface-variant hover:text-on-surface p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('settings')} aria-label="Help" className="text-on-surface-variant hover:text-on-surface p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[20px]">help_outline</span>
       </button>
       </div>

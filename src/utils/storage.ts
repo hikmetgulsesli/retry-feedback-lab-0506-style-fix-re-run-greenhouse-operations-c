@@ -34,14 +34,15 @@ export function loadState(): AppState {
   }
 }
 
-export function saveState(state: AppState): StorageResult {
+export function saveState(state: AppState): StorageResult & { lastSyncAt?: string } {
   try {
+    const now = new Date().toISOString();
     const toSave: AppState = {
       ...state,
-      lastSyncAt: new Date().toISOString(),
+      lastSyncAt: now,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-    return { success: true };
+    return { success: true, lastSyncAt: now };
   } catch (e) {
     const message = e instanceof Error ? e.message : 'Unknown storage error';
     console.error('Failed to save state to localStorage:', message);

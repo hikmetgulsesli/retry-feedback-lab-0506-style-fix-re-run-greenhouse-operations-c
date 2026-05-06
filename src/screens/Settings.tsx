@@ -20,7 +20,7 @@ function TabButton({ tab, icon, label, activeTab, setActiveTab }: { tab: Setting
   return (
     <button
       onClick={() => setActiveTab(tab)}
-      className={`flex items-center gap-sm px-md py-sm rounded font-body-md text-body-md flex-1 lg:flex-none justify-center lg:justify-start transition-colors ${
+      className={`flex items-center gap-sm px-md py-sm rounded font-body-md text-body-md flex-1 lg:flex-none justify-center lg:justify-start transition-colors cursor-pointer ${
         isActive
           ? "text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary"
           : "text-on-surface-variant hover:bg-surface-container-highest"
