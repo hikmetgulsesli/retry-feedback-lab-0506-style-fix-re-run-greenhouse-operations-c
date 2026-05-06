@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Storage Error</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#11131b",
+                        "surface-container": "#1d1f27",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-highest": "#32343d",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-bright": "#373942",
+                        "secondary": "#b9c7df",
+                        "on-background": "#e1e2ed",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-container": "#abb9d1",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-high": "#282a32",
+                        "tertiary": "#ffb596",
+                        "inverse-primary": "#0053db",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "on-surface": "#e1e2ed",
+                        "surface-container-low": "#191b23",
+                        "on-tertiary": "#581e00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#002a78",
+                        "outline-variant": "#434655",
+                        "on-secondary": "#233144",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8d90a0",
+                        "inverse-surface": "#e1e2ed",
+                        "surface": "#11131b",
+                        "tertiary-container": "#bc4800",
+                        "background": "#11131b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-lowest": "#0c0e16",
+                        "secondary-container": "#3c4a5e",
+                        "on-primary-container": "#eeefff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "h2": ["Inter"],
+                        "mono-data": ["monospace"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h2": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background h-screen flex flex-col font-body-md">
+<!-- TopAppBar (Suppressed due to intent: transactional error state) -->
+<main class="flex-1 flex items-center justify-center p-margin">
+<div class="bg-surface-container rounded-xl border border-error max-w-lg w-full flex flex-col items-center justify-center p-xl gap-lg">
+<div class="w-16 h-16 rounded-full bg-error-container flex items-center justify-center text-error border border-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1; font-size: 32px;">cloud_off</span>
+</div>
+<div class="text-center space-y-sm">
+<h1 class="font-h1 text-h1 text-error">Unable to save data to local storage</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    A critical error occurred while attempting to persist your session data. This may result in data loss if you navigate away. Please retry or export your current progress.
+                </p>
+<div class="bg-surface-container-highest p-sm rounded-md border border-outline-variant inline-block mt-sm">
+<span class="font-mono-data text-mono-data text-on-surface-variant">ERR_STORAGE_QUOTA_EXCEEDED</span>
+</div>
+</div>
+<div class="flex flex-col w-full gap-sm mt-md">
+<button class="h-10 w-full bg-primary-container text-on-primary-container rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none">
+<span class="material-symbols-outlined" style="font-size: 20px;">refresh</span>
+                    Retry
+                </button>
+<button class="h-10 w-full bg-transparent border border-outline-variant text-on-surface rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none">
+<span class="material-symbols-outlined" style="font-size: 20px;">download</span>
+                    Export Data
+                </button>
+</div>
+<div class="w-full pt-lg border-t border-outline-variant mt-sm">
+<button class="h-10 w-full bg-error-container text-on-error-container border border-error rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-error hover:text-on-error transition-colors focus:ring-2 focus:ring-error focus:ring-offset-2 focus:ring-offset-background outline-none">
+<span class="material-symbols-outlined" style="font-size: 20px;">delete_forever</span>
+                    Reset Storage
+                </button>
+<p class="font-body-sm text-body-sm text-error mt-xs text-center">Warning: This action will permanently delete local data.</p>
+</div>
+</div>
+</main>
+</body></html>

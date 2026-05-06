@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setfarm Greenhouse - Leads Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#11131b",
+                        "surface-container": "#1d1f27",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-highest": "#32343d",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-bright": "#373942",
+                        "secondary": "#b9c7df",
+                        "on-background": "#e1e2ed",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-container": "#abb9d1",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-high": "#282a32",
+                        "tertiary": "#ffb596",
+                        "inverse-primary": "#0053db",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "on-surface": "#e1e2ed",
+                        "surface-container-low": "#191b23",
+                        "on-tertiary": "#581e00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#002a78",
+                        "outline-variant": "#434655",
+                        "on-secondary": "#233144",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8d90a0",
+                        "inverse-surface": "#e1e2ed",
+                        "surface": "#11131b",
+                        "tertiary-container": "#bc4800",
+                        "background": "#11131b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-lowest": "#0c0e16",
+                        "secondary-container": "#3c4a5e",
+                        "on-primary-container": "#eeefff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "h2": ["Inter"],
+                        "mono-data": ["monospace"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h2": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-surface-container dark:bg-surface-container docked left-0 h-full w-64 border-r border-outline-variant dark:border-outline-variant flat no shadows flex flex-col py-lg px-md shrink-0 hidden md:flex z-10">
+<div class="mb-xl px-sm">
+<h1 class="font-display text-display text-primary dark:text-primary tracking-tight">Setfarm Greenhouse</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Operation Console</p>
+</div>
+<button class="bg-primary-container text-on-primary-container hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 h-8 rounded-DEFAULT font-h2 text-h2 mb-lg flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Lead
+        </button>
+<nav class="flex-1 flex flex-col gap-sm">
+<a class="text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high font-body-md text-body-md flex items-center gap-md px-sm py-sm rounded-l-DEFAULT transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+                Leads
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors font-body-md text-body-md flex items-center gap-md px-sm py-sm rounded-DEFAULT active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+                Pipeline
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors font-body-md text-body-md flex items-center gap-md px-sm py-sm rounded-DEFAULT active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Insights
+            </a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors font-body-md text-body-md flex items-center gap-md px-sm py-sm rounded-DEFAULT active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-lg border-t border-outline-variant px-sm flex items-center gap-md">
+<img alt="Operator Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar showing a professional operator in a high-tech setting. The lighting is slightly dim, reflecting a modern corporate aesthetic with subtle blue undertones. High quality, sharp focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSqZvU2XWF2h5BCrqY9Y-Iq0UzP2pOZ-fWM9aQUKOnnvH0-EbRbYzo2K3PsX8AbJLXT8Sgzr7pU6xV_9MeXUeTuS7cQCZtsxy_fmMX6u8tpJy-HoBojB20B1hSzGbqTtT-qaCGfj73U-zCDNa4zD_SVgKleEa1jZjf-Grzu0vxee9alLINk7dNvzRp0i70DAdTRj5Qee-3NSM5B61to-9dHIJMvUhehm48yx1_Pj1a6-LyU7DYcc2ZffVnGq8p0qExvrZneRoQqDWB"/>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface">Admin User</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Console Access</span>
+</div>
+</div>
+</aside>
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden bg-background">
+<!-- TopAppBar (Mobile) -->
+<header class="bg-surface-container dark:bg-surface-container docked top-0 w-full border-b border-outline-variant dark:border-outline-variant flat no shadows flex justify-between items-center h-16 px-lg shrink-0 md:hidden z-10">
+<h1 class="font-h1 text-h1 text-primary dark:text-primary tracking-tight">Setfarm Greenhouse</h1>
+<div class="flex items-center gap-md text-on-surface-variant dark:text-on-surface-variant">
+<button class="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-margin">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-lg gap-md">
+<div>
+<h2 class="font-display text-display text-on-surface">Leads Dashboard</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Manage and track potential commercial greenhouse clients.</p>
+</div>
+<div class="flex items-center gap-sm w-full md:w-auto">
+<div class="relative flex-1 md:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full h-8 pl-xl pr-sm bg-surface-container text-on-surface border border-outline-variant rounded-DEFAULT font-body-sm text-body-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-colors placeholder:text-on-surface-variant/50" placeholder="Search leads..." type="text"/>
+</div>
+<button class="h-8 px-md bg-surface-container border border-outline-variant text-on-surface rounded-DEFAULT hover:bg-surface-container-highest transition-colors flex items-center gap-xs font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                        Filters
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-surface-container border border-outline-variant p-md rounded-lg flex flex-col gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total Leads</span>
+<span class="font-display text-display text-on-surface">1,248</span>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-mono-data text-mono-data">+12% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md rounded-lg flex flex-col gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Active Pipeline</span>
+<span class="font-display text-display text-on-surface">$4.2M</span>
+<div class="flex items-center gap-xs text-primary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-mono-data text-mono-data">+5% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md rounded-lg flex flex-col gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">High Priority</span>
+<span class="font-display text-display text-on-surface">34</span>
+<div class="flex items-center gap-xs text-error">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span class="font-mono-data text-mono-data">Requires action</span>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-md rounded-lg flex flex-col gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Conversion Rate</span>
+<span class="font-display text-display text-on-surface">18.5%</span>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span>
+<span class="font-mono-data text-mono-data">Stable</span>
+</div>
+</div>
+</div>
+<!-- Data Table Container -->
+<div class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant">
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Company</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Contact</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Est. Value</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Status</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap">Last Contact</th>
+<th class="py-sm px-md font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider whitespace-nowrap text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors group">
+<td class="py-sm px-md font-h2 text-h2 text-on-surface">AgriTech Solutions</td>
+<td class="py-sm px-md text-on-surface-variant">Sarah Jenkins</td>
+<td class="py-sm px-md font-mono-data text-mono-data text-on-surface">$150,000</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-primary/20 text-primary font-mono-data text-mono-data border border-primary/30">Proposal Sent</span>
+</td>
+<td class="py-sm px-md text-on-surface-variant font-mono-data text-mono-data">Oct 24, 2023</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-end gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors group">
+<td class="py-sm px-md font-h2 text-h2 text-on-surface">Verdant Farms Corp</td>
+<td class="py-sm px-md text-on-surface-variant">Marcus Chen</td>
+<td class="py-sm px-md font-mono-data text-mono-data text-on-surface">$85,000</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-surface-bright text-on-surface-variant font-mono-data text-mono-data border border-outline-variant">Initial Contact</span>
+</td>
+<td class="py-sm px-md text-on-surface-variant font-mono-data text-mono-data">Oct 22, 2023</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-end gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-container-highest transition-colors group">
+<td class="py-sm px-md font-h2 text-h2 text-on-surface">Horizon Hydroponics</td>
+<td class="py-sm px-md text-on-surface-variant">Elena Rodriguez</td>
+<td class="py-sm px-md font-mono-data text-mono-data text-on-surface">$320,000</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-error-container/20 text-error font-mono-data text-mono-data border border-error/30">Negotiation</span>
+</td>
+<td class="py-sm px-md text-on-surface-variant font-mono-data text-mono-data">Oct 20, 2023</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-end gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors group">
+<td class="py-sm px-md font-h2 text-h2 text-on-surface">EcoGrow Logistics</td>
+<td class="py-sm px-md text-on-surface-variant">David Kim</td>
+<td class="py-sm px-md font-mono-data text-mono-data text-on-surface">$45,000</td>
+<td class="py-sm px-md">
+<span class="inline-flex items-center px-sm py-[2px] rounded-full bg-surface-bright text-on-surface-variant font-mono-data text-mono-data border border-outline-variant">Qualified</span>
+</td>
+<td class="py-sm px-md text-on-surface-variant font-mono-data text-mono-data">Oct 18, 2023</td>
+<td class="py-sm px-md text-right opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="flex items-center justify-end gap-xs text-on-surface-variant">
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span></button>
+<button class="p-xs hover:text-error transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+<button class="p-xs hover:text-primary transition-colors"><span class="material-symbols-outlined text-[18px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-high border-t border-outline-variant p-sm flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant px-sm">Showing 1-4 of 1,248</span>
+<div class="flex items-center gap-xs">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span class="material-symbols-outlined text-[18px]">chevron_left</span></button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT"><span class="material-symbols-outlined text-[18px]">chevron_right</span></button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

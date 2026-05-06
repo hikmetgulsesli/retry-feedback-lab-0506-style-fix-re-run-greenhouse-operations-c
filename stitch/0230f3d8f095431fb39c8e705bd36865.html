@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - Setfarm Greenhouse</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#b4c5ff",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "surface-dim": "#11131b",
+                      "surface-container": "#1d1f27",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#0d1c2e",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "surface-container-highest": "#32343d",
+                      "on-surface-variant": "#c3c6d7",
+                      "secondary-fixed-dim": "#b9c7df",
+                      "tertiary-fixed": "#ffdbcd",
+                      "surface-bright": "#373942",
+                      "secondary": "#b9c7df",
+                      "on-background": "#e1e2ed",
+                      "on-tertiary-fixed": "#360f00",
+                      "on-secondary-container": "#abb9d1",
+                      "on-primary-fixed": "#00174b",
+                      "on-tertiary-container": "#ffede6",
+                      "surface-container-high": "#282a32",
+                      "tertiary": "#ffb596",
+                      "inverse-primary": "#0053db",
+                      "secondary-fixed": "#d5e3fc",
+                      "primary-fixed": "#dbe1ff",
+                      "primary-container": "#2563eb",
+                      "on-surface": "#e1e2ed",
+                      "surface-container-low": "#191b23",
+                      "on-tertiary": "#581e00",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-primary": "#002a78",
+                      "outline-variant": "#434655",
+                      "on-secondary": "#233144",
+                      "on-error-container": "#ffdad6",
+                      "outline": "#8d90a0",
+                      "inverse-surface": "#e1e2ed",
+                      "surface": "#11131b",
+                      "tertiary-container": "#bc4800",
+                      "background": "#11131b",
+                      "error": "#ffb4ab",
+                      "surface-variant": "#32343d",
+                      "inverse-on-surface": "#2e3039",
+                      "primary": "#b4c5ff",
+                      "on-secondary-fixed-variant": "#3a485b",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "surface-container-lowest": "#0c0e16",
+                      "secondary-container": "#3c4a5e",
+                      "on-primary-container": "#eeefff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "lg": "24px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "margin": "24px",
+                      "gutter": "16px",
+                      "sm": "8px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "h1": ["Inter"],
+                      "h2": ["Inter"],
+                      "mono-data": ["monospace"],
+                      "body-sm": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "h1": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "h2": ["16px", {"lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600"}],
+                      "mono-data": ["13px", {"lineHeight": "18px", "letterSpacing": "0", "fontWeight": "500"}],
+                      "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "display": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md h-screen overflow-hidden flex flex-col md:flex-row">
+<!-- SideNavBar (Web) -->
+<nav class="hidden md:flex flex-col h-screen py-lg px-md docked left-0 w-64 bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant flex-shrink-0 z-10">
+<div class="mb-xl px-sm">
+<h1 class="font-display text-display text-primary dark:text-primary">Setfarm Greenhouse</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Operation Console</p>
+</div>
+<div class="flex-1 space-y-sm">
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Leads</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-body-md text-body-md">Pipeline</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-body-md text-body-md">Insights</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm rounded-lg text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+<div class="mt-auto px-sm">
+<button class="w-full flex items-center justify-center gap-sm bg-primary-container text-white py-sm px-md rounded-DEFAULT font-h2 text-h2 h-8 active:scale-95 transition-transform duration-150 hover:opacity-90 focus:ring-2 focus:ring-primary-container focus:outline-none focus:ring-offset-2 focus:ring-offset-surface-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                New Lead
+            </button>
+</div>
+</nav>
+<div class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-lg w-full docked top-0 bg-surface-container dark:bg-surface-container border-b border-outline-variant dark:border-outline-variant flex-shrink-0 z-10 md:hidden">
+<h1 class="font-h1 text-h1 text-primary dark:text-primary truncate mr-sm">Setfarm Greenhouse</h1>
+<div class="flex items-center gap-sm flex-shrink-0">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<img alt="Operator Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover ml-xs" data-alt="A close up portrait of a male professional operator wearing glasses in a dimly lit, high-tech industrial environment. Soft blue glow illuminating his face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8IVFTjvixfzuN25C49IeTGvZrvR9kjtNmLYRpbzmac6_E8MM7aDczKlgmEtaZY4VVxNL5TcoMaiqlMMZbk9zx-Uond2sagy2d4Ogp9uHI2Rek6YzqBH_aZ2kODwjrZs7SY0F4Oq7B7Fgw8VGs2In0R7_P4epoB0w-Cbb5fUBAXMlzAUVBW5XRYuIuVv0odmqsqfFhbmeKIFfiaQB2Yf5vMqGYShd_YOTLESxWKC6K7UWCkBM1kQwmCB6wlQDsCnvjQ0UqeXA91rK6"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-md md:p-lg bg-background">
+<div class="max-w-5xl mx-auto">
+<div class="mb-lg">
+<h2 class="font-display text-display text-on-background mb-xs">Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your operation preferences and application settings.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Settings Navigation (Bento Grid Style) -->
+<div class="lg:col-span-3 space-y-sm">
+<nav class="bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-row lg:flex-col p-xs gap-xs sticky top-4">
+<button class="flex items-center gap-sm px-md py-sm rounded text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary flex-1 lg:flex-none justify-center lg:justify-start">
+<span class="material-symbols-outlined text-[20px]" data-icon="display_settings">display_settings</span>
+<span class="hidden lg:inline">Display</span>
+</button>
+<button class="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest transition-colors flex-1 lg:flex-none justify-center lg:justify-start">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications_active">notifications_active</span>
+<span class="hidden lg:inline">Notifications</span>
+</button>
+<button class="flex items-center gap-sm px-md py-sm rounded text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-highest transition-colors flex-1 lg:flex-none justify-center lg:justify-start">
+<span class="material-symbols-outlined text-[20px]" data-icon="database">database</span>
+<span class="hidden lg:inline">Data</span>
+</button>
+</nav>
+</div>
+<!-- Settings Content -->
+<div class="lg:col-span-9 space-y-lg">
+<!-- Display Section -->
+<section class="bg-surface-container border border-outline-variant rounded-xl p-md md:p-lg">
+<h3 class="font-h1 text-h1 text-on-background mb-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" data-icon="display_settings">display_settings</span>
+                                Display Preferences
+                            </h3>
+<div class="space-y-xl">
+<!-- Density Setting -->
+<div>
+<div class="flex justify-between items-start mb-sm">
+<div>
+<h4 class="font-h2 text-h2 text-on-background">Interface Density</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Adjust the compactness of lists and tables.</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-sm">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="density" type="radio"/>
+<div class="border border-outline-variant rounded-lg p-sm text-center peer-checked:border-primary peer-checked:bg-surface-container-high transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined mb-xs text-on-surface-variant peer-checked:text-primary block" data-icon="density_small">density_small</span>
+<span class="font-body-sm text-body-sm text-on-background">Compact</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="density" type="radio"/>
+<div class="border border-outline-variant rounded-lg p-sm text-center peer-checked:border-primary peer-checked:bg-surface-container-high transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined mb-xs text-on-surface-variant peer-checked:text-primary block" data-icon="density_medium">density_medium</span>
+<span class="font-body-sm text-body-sm text-on-background">Standard</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="density" type="radio"/>
+<div class="border border-outline-variant rounded-lg p-sm text-center peer-checked:border-primary peer-checked:bg-surface-container-high transition-all hover:bg-surface-container-highest">
+<span class="material-symbols-outlined mb-xs text-on-surface-variant peer-checked:text-primary block" data-icon="density_large">density_large</span>
+<span class="font-body-sm text-body-sm text-on-background">Comfortable</span>
+</div>
+</label>
+</div>
+</div>
+<hr class="border-outline-variant"/>
+<!-- Currency Setting -->
+<div>
+<div class="flex justify-between items-center mb-sm">
+<div>
+<h4 class="font-h2 text-h2 text-on-background">Default Currency</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Used for pipeline and revenue calculations.</p>
+</div>
+</div>
+<div class="relative w-64">
+<select class="w-full bg-surface-dim border border-outline-variant rounded-DEFAULT h-8 px-sm font-body-md text-body-md text-on-background appearance-none focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<option value="USD">USD ($)</option>
+<option value="EUR">EUR (€)</option>
+<option value="GBP">GBP (£)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Actions Bar -->
+<div class="flex justify-end gap-sm pt-md">
+<button class="px-md h-8 border border-outline-variant rounded-DEFAULT font-h2 text-h2 text-on-background hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary focus:outline-none">
+                                Discard Changes
+                            </button>
+<button class="px-md h-8 bg-primary-container text-white rounded-DEFAULT font-h2 text-h2 hover:opacity-90 transition-opacity focus:ring-2 focus:ring-primary focus:outline-none focus:ring-offset-2 focus:ring-offset-background">
+                                Save Preferences
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

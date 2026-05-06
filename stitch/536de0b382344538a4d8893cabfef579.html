@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setfarm Greenhouse - Leads Form</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#11131b",
+                        "surface-container": "#1d1f27",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-highest": "#32343d",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-bright": "#373942",
+                        "secondary": "#b9c7df",
+                        "on-background": "#e1e2ed",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-container": "#abb9d1",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-high": "#282a32",
+                        "tertiary": "#ffb596",
+                        "inverse-primary": "#0053db",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "on-surface": "#e1e2ed",
+                        "surface-container-low": "#191b23",
+                        "on-tertiary": "#581e00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#002a78",
+                        "outline-variant": "#434655",
+                        "on-secondary": "#233144",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8d90a0",
+                        "inverse-surface": "#e1e2ed",
+                        "surface": "#11131b",
+                        "tertiary-container": "#bc4800",
+                        "background": "#11131b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-lowest": "#0c0e16",
+                        "secondary-container": "#3c4a5e",
+                        "on-primary-container": "#eeefff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "h2": ["Inter"],
+                        "mono-data": ["monospace"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h2": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container border-r border-outline-variant flex flex-col h-screen py-lg px-md w-64 shrink-0 hidden md:flex">
+<div class="mb-xl">
+<h1 class="font-display text-display text-primary tracking-tight">Setfarm Greenhouse</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Operation Console</p>
+</div>
+<button class="bg-primary-container text-white rounded w-full h-[32px] flex items-center justify-center font-body-sm text-body-sm mb-lg hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-[18px] mr-sm" data-icon="add">add</span>
+            New Lead
+        </button>
+<ul class="space-y-xs flex-1">
+<li>
+<a class="flex items-center px-sm py-[6px] rounded text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm text-[20px]" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+                    Leads
+                </a>
+</li>
+<li>
+<a class="flex items-center px-sm py-[6px] rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm text-[20px]" data-icon="account_tree">account_tree</span>
+                    Pipeline
+                </a>
+</li>
+<li>
+<a class="flex items-center px-sm py-[6px] rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm text-[20px]" data-icon="monitoring">monitoring</span>
+                    Insights
+                </a>
+</li>
+<li>
+<a class="flex items-center px-sm py-[6px] rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined mr-sm text-[20px]" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto flex items-center pt-md border-t border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden shrink-0">
+<img alt="Operator Profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional operator in a high-tech control room environment, softly lit by blue screen glow. Corporate and minimal style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYELhwMolQsmAFFYfHSjFrWiEqw0BjpfsY3oD87Mq9G_Nv2TVKXxThA19MbN7dcONu_2lv4pfqIiI_wjAfX8Yr2R-ImkSGjxS_r1iCDXzp3NM-syR0lci5i7Dwa-8FFl1rSvF9GZvktbvCvynoB7_DM8Iye80MZ535FRzkK2zNpjGS0FhwLm0Eug063wwq6NIzG_JZmVlPpUf4Af_utWESybm6ylPu1blgKWbv-hmuvsRFyfstpKFb-NbDcrXicN7rea2TEkPrHosb"/>
+</div>
+<div class="ml-sm">
+<p class="font-body-sm text-body-sm text-on-surface font-medium">Operator 01</p>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container border-b border-outline-variant flex justify-between items-center h-16 px-lg w-full shrink-0 md:hidden">
+<h1 class="font-display text-display text-primary tracking-tight">Setfarm Greenhouse</h1>
+<div class="flex items-center space-x-md">
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img alt="Operator Profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional operator in a high-tech control room environment, softly lit by blue screen glow. Corporate and minimal style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVxtk2qg46xnZ2KYKCrFeVCckGzYajudimFM2JEnvgTSb2Yk4Tw9JQYAbXGQamilR96x6osxw4br2x3Aue0mha9uqdEpBjQHJZ9A5fcubuRna31C698euPS-s6wooLfCCPnsFz8DrSwlQYhYXFIDHkfXY9fx0_tGQp1KvFwedS9jocwzN9YI4Q4nUcXuwIm6l6NQzkqDvXurUFmcm8qiMIxnZYVBT6YOKgCl1s8lL-9rZOD9shxqOjdwV0y5GsF-PEpaKLe77BfHra"/>
+</div>
+</div>
+</header>
+<header class="bg-surface-container border-b border-outline-variant justify-end items-center h-16 px-lg w-full shrink-0 hidden md:flex">
+<div class="flex items-center space-x-md">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-sm text-on-surface-variant text-[20px]" data-icon="search">search</span>
+<input class="bg-surface-dim border border-outline-variant rounded h-[32px] pl-[32px] pr-sm text-body-sm focus:border-primary-container focus:ring-0 w-64 text-on-surface" placeholder="Search..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-xs transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-margin md:p-[32px] bg-background">
+<div class="max-w-4xl mx-auto">
+<div class="mb-lg flex items-center justify-between">
+<div>
+<div class="flex items-center text-on-surface-variant mb-xs">
+<a class="font-body-sm text-body-sm hover:text-primary transition-colors" href="#">Leads</a>
+<span class="material-symbols-outlined text-[16px] mx-[4px]">chevron_right</span>
+<span class="font-body-sm text-body-sm text-on-surface">Create New Lead</span>
+</div>
+<h2 class="font-h1 text-h1 text-on-surface">Create New Lead</h2>
+</div>
+</div>
+<div class="bg-surface-container border border-outline-variant rounded-lg p-lg shadow-sm">
+<form>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Section: General Info -->
+<div class="col-span-1 md:col-span-2 mb-md">
+<h3 class="font-h2 text-h2 text-primary border-b border-outline-variant pb-xs mb-sm">General Information</h3>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="lead-name">Lead Name <span class="text-error">*</span></label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface" id="lead-name" name="lead-name" placeholder="e.g. Acme Corp Greenhouse" required="" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="company">Company</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface" id="company" name="company" placeholder="Company Name" type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="source">Source</label>
+<select class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface appearance-none cursor-pointer" id="source" name="source">
+<option disabled="" selected="" value="">Select Source</option>
+<option value="trade_show">Trade Show</option>
+<option value="referral">Referral</option>
+<option value="website">Website Inquiry</option>
+<option value="outbound">Outbound Sales</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="est-value">Estimated Value ($)</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm font-mono-data text-mono-data focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface" id="est-value" name="est-value" placeholder="0.00" type="number"/>
+</div>
+<!-- Section: Status & Follow-up -->
+<div class="col-span-1 md:col-span-2 mt-md mb-md">
+<h3 class="font-h2 text-h2 text-primary border-b border-outline-variant pb-xs mb-sm">Status &amp; Action</h3>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="status">Status <span class="text-error">*</span></label>
+<select class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface appearance-none cursor-pointer" id="status" name="status" required="">
+<option value="new">New</option>
+<option value="contacted">Contacted</option>
+<option value="qualified">Qualified</option>
+<option value="proposal">Proposal Sent</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="next-date">Next Action Date</label>
+<input class="w-full bg-surface-dim border border-outline-variant rounded h-[32px] px-sm text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface [color-scheme:dark]" id="next-date" name="next-date" type="date"/>
+</div>
+<div class="col-span-1 md:col-span-2 space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant block uppercase tracking-widest" for="next-action">Next Action Details</label>
+<textarea class="w-full bg-surface-dim border border-outline-variant rounded px-sm py-xs text-body-sm focus:border-primary-container focus:outline-none focus:ring-0 text-on-surface resize-none" id="next-action" name="next-action" placeholder="Describe the next steps..." rows="3"></textarea>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="mt-lg pt-md border-t border-outline-variant flex justify-end space-x-sm">
+<button class="h-[32px] px-md rounded border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-container-highest transition-colors" type="button">
+                                Cancel
+                            </button>
+<button class="h-[32px] px-md rounded bg-primary-container text-white font-body-sm text-body-sm hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container" type="submit">
+                                Save Lead
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</main>
+</div>
+</body></html>

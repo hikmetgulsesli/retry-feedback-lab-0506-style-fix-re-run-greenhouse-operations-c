@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Setfarm Greenhouse - Pipeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#b4c5ff",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#11131b",
+                        "surface-container": "#1d1f27",
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-highest": "#32343d",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-bright": "#373942",
+                        "secondary": "#b9c7df",
+                        "on-background": "#e1e2ed",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-container": "#abb9d1",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-high": "#282a32",
+                        "tertiary": "#ffb596",
+                        "inverse-primary": "#0053db",
+                        "secondary-fixed": "#d5e3fc",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "on-surface": "#e1e2ed",
+                        "surface-container-low": "#191b23",
+                        "on-tertiary": "#581e00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary": "#002a78",
+                        "outline-variant": "#434655",
+                        "on-secondary": "#233144",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#8d90a0",
+                        "inverse-surface": "#e1e2ed",
+                        "surface": "#11131b",
+                        "tertiary-container": "#bc4800",
+                        "background": "#11131b",
+                        "error": "#ffb4ab",
+                        "surface-variant": "#32343d",
+                        "inverse-on-surface": "#2e3039",
+                        "primary": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-lowest": "#0c0e16",
+                        "secondary-container": "#3c4a5e",
+                        "on-primary-container": "#eeefff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin": "24px",
+                        "gutter": "16px",
+                        "sm": "8px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h1": ["Inter"],
+                        "h2": ["Inter"],
+                        "mono-data": ["monospace"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h1": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "h2": ["16px", { "lineHeight": "24px", "letterSpacing": "0", "fontWeight": "600" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "500" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container dark:bg-surface-container docked left-0 h-full w-64 border-r border-outline-variant dark:border-outline-variant flex flex-col py-lg px-md z-20 shrink-0">
+<div class="mb-xl">
+<h1 class="font-display text-display text-primary dark:text-primary">Setfarm Greenhouse</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-xs">Operation Console</p>
+</div>
+<div class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md text-body-md">Leads</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-body-md text-body-md">Pipeline</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-body-md text-body-md">Insights</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+<button class="mt-lg w-full bg-primary-container text-on-primary-container h-8 rounded flex items-center justify-center gap-sm font-body-md text-body-md hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Lead
+        </button>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col h-full overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-container border-b border-outline-variant dark:border-outline-variant flex justify-between items-center h-16 px-lg w-full z-10 shrink-0">
+<div class="flex items-center gap-md">
+<h2 class="font-h1 text-h1 text-primary dark:text-primary">Pipeline</h2>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="h-8 bg-surface dark:bg-surface border border-outline-variant rounded pl-xl pr-sm text-body-sm font-body-sm focus:ring-2 focus:ring-primary-container focus:outline-none focus:border-primary-container transition-colors w-64 placeholder-on-surface-variant text-on-surface" placeholder="Search pipeline..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-highest rounded p-sm transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant ml-sm cursor-pointer hover:ring-2 hover:ring-primary-container transition-all">
+<img alt="Operator Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a confident operator in a modern industrial setting. The lighting is crisp and cool, reflecting a high-tech corporate environment. The subject is wearing dark, minimal clothing, fitting seamlessly into the dark mode aesthetic of the interface. The background is a soft, out-of-focus deep blue-gray." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVEg4SyAzsdvZMrNMyIJdSQOWMzJnYQ5rCHNcrgcALMcVfEQeCSwdTqBOBnQ47hanNc1m5HaFS6Vq55PZsb8zbSWTm3Cs2GHGImYS_Jh1p3wcYqDArb81-zBKwBh2Emi-lFD9lu55Gq7ZxxH3t8xNipjN1g6fmLgWWjU1q4M78KWmYRJXFuhquSo7tKTbiLAVd-viZ6IVfB8mOS7c4OmJXIvhWttRSgQ7WRpKuJghbo0X1n7qyTrsMcuY2EhfoYU30uBiD3HVpKDSI"/>
+</div>
+</div>
+</header>
+<!-- Kanban Board Canvas -->
+<main class="flex-1 overflow-x-auto overflow-y-hidden p-margin flex gap-gutter">
+<!-- Column: New -->
+<div class="flex flex-col w-72 shrink-0 h-full">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-h2 text-h2 text-on-surface">New</h3>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">3</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">$45k</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg border border-outline-variant p-sm flex flex-col gap-sm overflow-y-auto">
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">AgriTech Solutions</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Sarah Jenkins</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase flex items-center justify-center">Q3</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$15,000</span>
+</div>
+</div>
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">GreenLeaf Co.</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Marcus Thorne</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase flex items-center justify-center">Inbound</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$22,000</span>
+</div>
+</div>
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">Urban Harvest</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Lisa Ray</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs"></div>
+<span class="font-mono-data text-mono-data text-on-surface">$8,000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Contacted -->
+<div class="flex flex-col w-72 shrink-0 h-full">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-h2 text-h2 text-on-surface">Contacted</h3>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">2</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">$85k</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg border border-outline-variant p-sm flex flex-col gap-sm overflow-y-auto">
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)] border-l-2 border-l-tertiary">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">BioFarms Inc.</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">David Chen</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-tertiary-container/20 text-tertiary-fixed-dim font-label-caps text-label-caps uppercase flex items-center justify-center">Urgent</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$55,000</span>
+</div>
+</div>
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">NextGen Hydro</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Elena Rostova</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase flex items-center justify-center">Outbound</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$30,000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Qualified -->
+<div class="flex flex-col w-72 shrink-0 h-full">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-h2 text-h2 text-on-surface">Qualified</h3>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">1</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">$120k</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg border border-outline-variant p-sm flex flex-col gap-sm overflow-y-auto">
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">MegaCorp Ag</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Robert Paulson</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-primary-container/20 text-primary font-label-caps text-label-caps uppercase flex items-center justify-center">Enterprise</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$120,000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Proposal -->
+<div class="flex flex-col w-72 shrink-0 h-full">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-h2 text-h2 text-on-surface">Proposal</h3>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">2</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">$18k</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg border border-outline-variant p-sm flex flex-col gap-sm overflow-y-auto">
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">Local Roots</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Tim Baker</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs"></div>
+<span class="font-mono-data text-mono-data text-on-surface">$12,000</span>
+</div>
+</div>
+<!-- Card -->
+<div class="bg-surface border border-outline-variant rounded p-md hover:border-primary-container transition-colors cursor-grab active:cursor-grabbing shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-h2 text-h2 text-on-surface line-clamp-1">SkyHigh Farms</h4>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-md">Amy Lin</p>
+<div class="flex justify-between items-end">
+<div class="flex gap-xs">
+<span class="h-5 px-sm rounded bg-surface-variant text-on-surface-variant font-label-caps text-label-caps uppercase flex items-center justify-center">Pilot</span>
+</div>
+<span class="font-mono-data text-mono-data text-on-surface">$6,000</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Negotiation -->
+<div class="flex flex-col w-72 shrink-0 h-full">
+<div class="flex justify-between items-center mb-sm px-sm">
+<h3 class="font-h2 text-h2 text-on-surface">Negotiation</h3>
+<div class="flex items-center gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">0</span>
+<span class="font-mono-data text-mono-data text-on-surface-variant">$0</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-low rounded-lg border border-outline-variant border-dashed p-sm flex flex-col gap-sm overflow-y-auto items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-outline text-[32px] mb-sm">inbox</span>
+<p class="font-body-sm text-body-sm text-outline text-center">Drop leads here to start negotiation</p>
+</div>
+</div>
+<!-- Empty space filler for scrolling -->
+<div class="w-8 shrink-0"></div>
+</main>
+</div>
+</body></html>
