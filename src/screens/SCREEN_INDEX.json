@@ -1,0 +1,74 @@
+[
+  {
+    "screenId": "0230f3d8f095431fb39c8e705bd36865",
+    "title": "Settings",
+    "componentName": "Settings",
+    "file": "src/screens/Settings.tsx",
+    "buttons": 8,
+    "inputs": 3,
+    "links": 4
+  },
+  {
+    "screenId": "536de0b382344538a4d8893cabfef579",
+    "title": "Lead Details Form",
+    "componentName": "LeadDetailsForm",
+    "file": "src/screens/LeadDetailsForm.tsx",
+    "buttons": 7,
+    "inputs": 5,
+    "links": 5
+  },
+  {
+    "screenId": "dc363302d551447e892fdc0b585c2fb5",
+    "title": "Leads Dashboard",
+    "componentName": "LeadsDashboard",
+    "file": "src/screens/LeadsDashboard.tsx",
+    "buttons": 18,
+    "inputs": 1,
+    "links": 4
+  },
+  {
+    "screenId": "9acc5f823e7641b6b20fef560c0f7a6a",
+    "title": "Pipeline Pipeline",
+    "componentName": "PipelinePipeline",
+    "file": "src/screens/PipelinePipeline.tsx",
+    "buttons": 3,
+    "inputs": 1,
+    "links": 4
+  },
+  {
+    "screenId": "1d2c49c65b904099963b71bcf705c7eb",
+    "title": "Empty State",
+    "componentName": "EmptyState",
+    "file": "src/screens/EmptyState.tsx",
+    "buttons": 6,
+    "inputs": 1,
+    "links": 8
+  },
+  {
+    "screenId": "51cce7c1bcf6494db968e93d6ff25507",
+    "title": "Storage Error State",
+    "componentName": "StorageErrorState",
+    "file": "src/screens/StorageErrorState.tsx",
+    "buttons": 3,
+    "inputs": 0,
+    "links": 0
+  },
+  {
+    "screenId": "c379b79eabe94b4c81563580362cd777",
+    "title": "Profile Panel",
+    "componentName": "ProfilePanel",
+    "file": "src/screens/ProfilePanel.tsx",
+    "buttons": 6,
+    "inputs": 3,
+    "links": 4
+  },
+  {
+    "screenId": "e3ec63b18b60440ea90dfcb31f63c9d7",
+    "title": "Insights Dashboard",
+    "componentName": "InsightsDashboard",
+    "file": "src/screens/InsightsDashboard.tsx",
+    "buttons": 6,
+    "inputs": 0,
+    "links": 4
+  }
+]
