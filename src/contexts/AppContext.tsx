@@ -46,7 +46,7 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         selectedLeadId: action.leadId,
-        screen: action.leadId ? 'lead-form' : 'leads',
+        screen: 'lead-form',
       };
     case 'ADD_LEAD': {
       const newLeads = [action.lead, ...state.leads];
