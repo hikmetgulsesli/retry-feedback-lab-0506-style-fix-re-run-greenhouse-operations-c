@@ -132,7 +132,7 @@ export function Settings(props: SettingsProps) {
       <span className="material-symbols-outlined" data-icon="monitoring">monitoring</span>
       <span className="font-body-md text-body-md">Insights</span>
       </a>
-      <a className="flex items-center gap-sm px-md py-sm rounded-lg text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" role="button">
+      <a onClick={() => navigate('settings')} className="flex items-center gap-sm px-md py-sm rounded-lg text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" data-icon="settings">settings</span>
       <span className="font-body-md text-body-md">Settings</span>
       </a>
@@ -149,10 +149,10 @@ export function Settings(props: SettingsProps) {
       <header className="flex justify-between items-center h-16 px-lg w-full docked top-0 bg-surface-container dark:bg-surface-container border-b border-outline-variant dark:border-outline-variant flex-shrink-0 z-10 md:hidden">
       <h1 className="font-h1 text-h1 text-primary dark:text-primary truncate mr-sm">Setfarm Greenhouse</h1>
       <div className="flex items-center gap-sm flex-shrink-0">
-      <button className="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => setActiveTab('notifications')} aria-label="Notifications" className="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="notifications">notifications</span>
       </button>
-      <button className="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none">
+      <button onClick={() => navigate('profile')} aria-label="Help" className="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full focus:ring-2 focus:ring-primary-container focus:outline-none cursor-pointer">
       <span className="material-symbols-outlined" data-icon="help_outline">help_outline</span>
       </button>
       <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant object-cover ml-xs" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8IVFTjvixfzuN25C49IeTGvZrvR9kjtNmLYRpbzmac6_E8MM7aDczKlgmEtaZY4VVxNL5TcoMaiqlMMZbk9zx-Uond2sagy2d4Ogp9uHI2Rek6YzqBH_aZ2kODwjrZs7SY0F4Oq7B7Fgw8VGs2In0R7_P4epoB0w-Cbb5fUBAXMlzAUVBW5XRYuIuVv0odmqsqfFhbmeKIFfiaQB2Yf5vMqGYShd_YOTLESxWKC6K7UWCkBM1kQwmCB6wlQDsCnvjQ0UqeXA91rK6" />
