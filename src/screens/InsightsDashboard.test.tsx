@@ -84,6 +84,7 @@ function setupMock(leads: Lead[] = mockLeads, settings: AppSettings = mockSettin
     updateLead: vi.fn(),
     deleteLead: vi.fn(),
     updateSettings: vi.fn(),
+    importBackup: vi.fn(),
     dismissStorageError: vi.fn(),
   });
 }

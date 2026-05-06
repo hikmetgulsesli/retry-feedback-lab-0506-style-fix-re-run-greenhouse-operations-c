@@ -7,7 +7,7 @@
 // 3. Add onClick/onChange handlers to interactive elements
 // 4. Replace placeholder data with props/state
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppContext } from "../contexts/AppContext";
 import { exportState, importState, clearState } from "../utils/storage";
 
@@ -15,8 +15,25 @@ interface SettingsProps {}
 
 type SettingsTab = "display" | "notifications" | "data";
 
+function TabButton({ tab, icon, label, activeTab, setActiveTab }: { tab: SettingsTab; icon: string; label: string; activeTab: SettingsTab; setActiveTab: (tab: SettingsTab) => void }) {
+  const isActive = activeTab === tab;
+  return (
+    <button
+      onClick={() => setActiveTab(tab)}
+      className={`flex items-center gap-sm px-md py-sm rounded font-body-md text-body-md flex-1 lg:flex-none justify-center lg:justify-start transition-colors ${
+        isActive
+          ? "text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary"
+          : "text-on-surface-variant hover:bg-surface-container-highest"
+      }`}
+    >
+      <span className="material-symbols-outlined text-[20px]" data-icon={icon}>{icon}</span>
+      <span className="hidden lg:inline">{label}</span>
+    </button>
+  );
+}
+
 export function Settings(props: SettingsProps) {
-  const { settings, updateSettings, navigate, navigateToLead, leads } = useAppContext();
+  const { settings, updateSettings, navigate, navigateToLead, leads, importBackup } = useAppContext();
   const [activeTab, setActiveTab] = useState<SettingsTab>("display");
   const [localDensity, setLocalDensity] = useState(settings.density);
   const [localCurrency, setLocalCurrency] = useState(settings.currency);
@@ -24,6 +41,13 @@ export function Settings(props: SettingsProps) {
   const [localNotifyAction, setLocalNotifyAction] = useState(settings.notifyActionRequired);
   const [importError, setImportError] = useState<string | null>(null);
   const [importSuccess, setImportSuccess] = useState(false);
+
+  useEffect(() => {
+    setLocalDensity(settings.density);
+    setLocalCurrency(settings.currency);
+    setLocalNotifyNewLead(settings.notifyNewLead);
+    setLocalNotifyAction(settings.notifyActionRequired);
+  }, [settings.density, settings.currency, settings.notifyNewLead, settings.notifyActionRequired]);
 
   const handleSave = () => {
     updateSettings({
@@ -67,7 +91,7 @@ export function Settings(props: SettingsProps) {
       const text = reader.result as string;
       const imported = importState(text);
       if (imported) {
-        updateSettings(imported.settings);
+        importBackup(imported);
         setImportError(null);
         setImportSuccess(true);
         setTimeout(() => setImportSuccess(false), 3000);
@@ -86,20 +110,6 @@ export function Settings(props: SettingsProps) {
       window.location.reload();
     }
   };
-
-  const TabButton = ({ tab, icon, label }: { tab: SettingsTab; icon: string; label: string }) => (
-    <button
-      onClick={() => setActiveTab(tab)}
-      className={`flex items-center gap-sm px-md py-sm rounded font-body-md text-body-md flex-1 lg:flex-none justify-center lg:justify-start transition-colors ${
-        activeTab === tab
-          ? "text-primary font-h2 text-h2 bg-surface-container-high border-l-2 border-primary"
-          : "text-on-surface-variant hover:bg-surface-container-highest"
-      }`}
-    >
-      <span className="material-symbols-outlined text-[20px]" data-icon={icon}>{icon}</span>
-      <span className="hidden lg:inline">{label}</span>
-    </button>
-  );
 
   return (
     <>
@@ -159,9 +169,9 @@ export function Settings(props: SettingsProps) {
       {/* Settings Navigation (Bento Grid Style) */}
       <div className="lg:col-span-3 space-y-sm">
       <nav className="bg-surface-container border border-outline-variant rounded-lg overflow-hidden flex flex-row lg:flex-col p-xs gap-xs sticky top-4">
-        <TabButton tab="display" icon="display_settings" label="Display" />
-        <TabButton tab="notifications" icon="notifications_active" label="Notifications" />
-        <TabButton tab="data" icon="database" label="Data" />
+        <TabButton tab="display" icon="display_settings" label="Display" activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabButton tab="notifications" icon="notifications_active" label="Notifications" activeTab={activeTab} setActiveTab={setActiveTab} />
+        <TabButton tab="data" icon="database" label="Data" activeTab={activeTab} setActiveTab={setActiveTab} />
       </nav>
       </div>
       {/* Settings Content */}

@@ -31,6 +31,7 @@ function setupMock() {
     updateSettings: vi.fn((partial) => {
       Object.assign(mockSettings, partial);
     }),
+    importBackup: vi.fn(),
     dismissStorageError: vi.fn(),
   });
 }
@@ -114,6 +115,7 @@ describe('ProfilePanel', () => {
       updateLead: vi.fn(),
       deleteLead: vi.fn(),
       updateSettings: mockUpdate,
+      importBackup: vi.fn(),
       dismissStorageError: vi.fn(),
     });
     render(<ProfilePanel />);
@@ -140,6 +142,7 @@ describe('ProfilePanel', () => {
       updateLead: vi.fn(),
       deleteLead: vi.fn(),
       updateSettings: mockUpdate,
+      importBackup: vi.fn(),
       dismissStorageError: vi.fn(),
     });
     render(<ProfilePanel />);

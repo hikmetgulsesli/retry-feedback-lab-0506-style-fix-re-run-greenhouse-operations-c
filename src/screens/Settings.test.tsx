@@ -236,4 +236,57 @@ describe('Settings', () => {
     fireEvent.click(screen.getByText('Pipeline'));
     await waitFor(() => expect(screen.getByTestId('screen').textContent).toBe('pipeline'));
   });
+
+  it('restores leads and syncs local state after import', async () => {
+    function StateTracker() {
+      const { leads, settings } = useAppContext();
+      return (
+        <div>
+          <div data-testid="leadCount">{leads.length}</div>
+          <div data-testid="importedCurrency">{settings.currency}</div>
+          <div data-testid="importedDensity">{settings.density}</div>
+        </div>
+      );
+    }
+    render(
+      <TestWrapper>
+        <Settings />
+        <StateTracker />
+      </TestWrapper>
+    );
+    await waitFor(() => expect(screen.getByText('Data')).toBeInTheDocument());
+    fireEvent.click(screen.getByText('Data'));
+    await waitFor(() => expect(screen.getByText('Import Backup')).toBeInTheDocument());
+    const fileInput = screen.getByText('Import Backup').closest('label')?.querySelector('input[type="file"]') as HTMLInputElement;
+    const backup = {
+      leads: [
+        {
+          id: 'imported-lead-1',
+          company: 'Imported Corp',
+          contactName: 'Imported User',
+          contactEmail: 'imported@example.com',
+          contactPhone: '+1-555-9999',
+          estimatedValue: 99999,
+          status: 'Qualified',
+          lastContactDate: '2024-01-01',
+          notes: 'Imported note',
+          createdAt: '2024-01-01T00:00:00Z',
+          updatedAt: '2024-01-01T00:00:00Z',
+        },
+      ],
+      settings: { density: 'comfortable', currency: 'GBP', darkMode: true, notifyNewLead: false, notifyActionRequired: false },
+      lastSyncAt: '2024-06-01T00:00:00Z',
+    };
+    const validFile = new File([JSON.stringify(backup)], 'backup.json', { type: 'application/json' });
+    fireEvent.change(fileInput, { target: { files: [validFile] } });
+    await waitFor(() => expect(screen.getByText('Import successful! Settings restored.')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId('leadCount').textContent).toBe('1'));
+    await waitFor(() => expect(screen.getByTestId('importedCurrency').textContent).toBe('GBP'));
+    await waitFor(() => expect(screen.getByTestId('importedDensity').textContent).toBe('comfortable'));
+    // Verify local state synced: switch to Display tab and check currency dropdown
+    fireEvent.click(screen.getByText('Display'));
+    await waitFor(() => expect(screen.getByText('Display Preferences')).toBeInTheDocument());
+    const select = screen.getByDisplayValue('GBP (£)');
+    expect(select).toBeInTheDocument();
+  });
 });

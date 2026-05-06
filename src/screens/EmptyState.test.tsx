@@ -29,6 +29,7 @@ function setupMock() {
     updateLead: vi.fn(),
     deleteLead: vi.fn(),
     updateSettings: vi.fn(),
+    importBackup: vi.fn(),
     dismissStorageError: vi.fn(),
   });
 }
