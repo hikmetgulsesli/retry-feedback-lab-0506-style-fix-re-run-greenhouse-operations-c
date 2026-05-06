@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from 'react';
 import type { Lead, LeadStatus, AppSettings, Screen, AppState } from '../types/domain';
-import { generateLeadId } from '../types/domain';
+import { generateLeadId, DEFAULT_SETTINGS } from '../types/domain';
 import { loadState, saveState } from '../utils/storage';
 
 export interface AppContextValue {
@@ -82,7 +82,7 @@ const AppContext = createContext<AppContextValue | null>(null);
 const initialState: State = {
   screen: 'leads',
   leads: [],
-  settings: { density: 'compact', currency: 'USD', darkMode: true, notifyNewLead: true, notifyActionRequired: true },
+  settings: { ...DEFAULT_SETTINGS },
   selectedLeadId: null,
   storageError: null,
   lastSyncAt: null,
