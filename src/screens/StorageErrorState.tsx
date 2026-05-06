@@ -8,10 +8,43 @@
 // 4. Replace placeholder data with props/state
 
 import { useState } from "react";
+import { useAppContext } from "../contexts/AppContext";
+import { exportState, clearState, loadState } from "../utils/storage";
 
-interface StorageErrorStateProps {}
+interface StorageErrorStateProps {
+  error?: string;
+  onDismiss?: () => void;
+}
 
 export function StorageErrorState(props: StorageErrorStateProps) {
+  const { error, onDismiss } = props;
+  const { leads, settings, dismissStorageError } = useAppContext();
+  const [exported, setExported] = useState(false);
+
+  const handleRetry = () => {
+    const state = loadState();
+    if (state.lastSyncAt !== null) {
+      if (onDismiss) onDismiss();
+      else dismissStorageError();
+    }
+  };
+
+  const handleExport = () => {
+    const blob = new Blob([exportState({ leads, settings, lastSyncAt: new Date().toISOString() })], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "setfarm-backup.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    setExported(true);
+  };
+
+  const handleReset = () => {
+    clearState();
+    window.location.reload();
+  };
+
   return (
     <>
       {/* TopAppBar (Suppressed due to intent: transactional error state) */}
@@ -26,21 +59,21 @@ export function StorageErrorState(props: StorageErrorStateProps) {
                           A critical error occurred while attempting to persist your session data. This may result in data loss if you navigate away. Please retry or export your current progress.
                       </p>
       <div className="bg-surface-container-highest p-sm rounded-md border border-outline-variant inline-block mt-sm">
-      <span className="font-mono-data text-mono-data text-on-surface-variant">ERR_STORAGE_QUOTA_EXCEEDED</span>
+      <span className="font-mono-data text-mono-data text-on-surface-variant">{error || "ERR_STORAGE_QUOTA_EXCEEDED"}</span>
       </div>
       </div>
       <div className="flex flex-col w-full gap-sm mt-md">
-      <button className="h-10 w-full bg-primary-container text-on-primary-container rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none">
+      <button onClick={handleRetry} className="h-10 w-full bg-primary-container text-on-primary-container rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none cursor-pointer">
       <span className="material-symbols-outlined" style={{fontSize: "20px"}}>refresh</span>
                           Retry
                       </button>
-      <button className="h-10 w-full bg-transparent border border-outline-variant text-on-surface rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none">
+      <button onClick={handleExport} className="h-10 w-full bg-transparent border border-outline-variant text-on-surface rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:ring-offset-2 focus:ring-offset-background outline-none cursor-pointer">
       <span className="material-symbols-outlined" style={{fontSize: "20px"}}>download</span>
-                          Export Data
+                          {exported ? "Exported!" : "Export Data"}
                       </button>
       </div>
       <div className="w-full pt-lg border-t border-outline-variant mt-sm">
-      <button className="h-10 w-full bg-error-container text-on-error-container border border-error rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-error hover:text-on-error transition-colors focus:ring-2 focus:ring-error focus:ring-offset-2 focus:ring-offset-background outline-none">
+      <button onClick={handleReset} className="h-10 w-full bg-error-container text-on-error-container border border-error rounded-DEFAULT font-h2 text-h2 flex items-center justify-center gap-xs hover:bg-error hover:text-on-error transition-colors focus:ring-2 focus:ring-error focus:ring-offset-2 focus:ring-offset-background outline-none cursor-pointer">
       <span className="material-symbols-outlined" style={{fontSize: "20px"}}>delete_forever</span>
                           Reset Storage
                       </button>

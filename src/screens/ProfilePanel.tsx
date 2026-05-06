@@ -8,10 +8,15 @@
 // 4. Replace placeholder data with props/state
 
 import { useState } from "react";
+import { useAppContext } from "../contexts/AppContext";
 
 interface ProfilePanelProps {}
 
 export function ProfilePanel(props: ProfilePanelProps) {
+  const { navigate, navigateToLead } = useAppContext();
+  const [newLeadToggle, setNewLeadToggle] = useState(true);
+  const [actionToggle, setActionToggle] = useState(true);
+
   return (
     <>
       {/* TopAppBar */}
@@ -30,8 +35,8 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <button aria-label="Help" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-container-highest transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>help_outline</span>
       </button>
-      <button className="h-8 w-8 rounded-full overflow-hidden border border-outline-variant focus:ring-2 focus:ring-primary-container focus:outline-none ml-sm relative">
-      <img alt="Operator Profile" className="w-full h-full object-cover" data-alt="A professional headshot of a greenhouse operator in a subtle dark environment. The lighting is low-key, emphasizing a serious, focused corporate mood. The subject wears dark, minimalist clothing, blending into the sleek, industrial background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkmwRGFTgfbPS5kaSf-mOkKDSEq7zSCfRRGXp4aK2vU3s88EnmbRZP6vpiG0FEWYH5QkaWiUlKkbe4wF3clY-B3zS1PTycl4rfRorTB4NWy4GMfoggxAr_Je9E_9Xu11jvryhkFtDYgInTI67WVSLKnlJc0XwdZBCsYuoY0MeJIdu3KmaTIZVoABpuACbpTerss7GZ8la9ZPFMN0IUvhxptNxhCJTYTF-e0jLo-9dz3-Hr9l73eA2bRyqvonzjzRh08kZInU4sm23h" />
+      <button onClick={() => navigate("profile")} className="h-8 w-8 rounded-full overflow-hidden border border-outline-variant focus:ring-2 focus:ring-primary-container focus:outline-none ml-sm relative cursor-pointer">
+      <img alt="Operator Profile" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkmwRGFTgfbPS5kaSf-mOkKDSEq7zSCfRRGXp4aK2vU3s88EnmbRZP6vpiG0FEWYH5QkaWiUlKkbe4wF3clY-B3zS1PTycl4rfRorTB4NWy4GMfoggxAr_Je9E_9Xu11jvryhkFtDYgInTI67WVSLKnlJc0XwdZBCsYuoY0MeJIdu3KmaTIZVoABpuACbpTerss7GZ8la9ZPFMN0IUvhxptNxhCJTYTF-e0jLo-9dz3-Hr9l73eA2bRyqvonzjzRh08kZInU4sm23h" />
       {/* Active Indicator */}
       <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-primary-container border border-surface rounded-full"></span>
       </button>
@@ -45,32 +50,32 @@ export function ProfilePanel(props: ProfilePanelProps) {
       </div>
       <ul className="flex-1 space-y-xs">
       <li>
-      <a className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("leads")} className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>group</span>
       <span className="font-body-md text-body-md">Leads</span>
       </a>
       </li>
       <li>
-      <a className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("pipeline")} className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>account_tree</span>
       <span className="font-body-md text-body-md">Pipeline</span>
       </a>
       </li>
       <li>
-      <a className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("insights")} className="flex items-center gap-sm px-sm py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 0"}}>monitoring</span>
       <span className="font-body-md text-body-md">Insights</span>
       </a>
       </li>
       <li>
-      <a className="flex items-center gap-sm px-sm py-2 rounded text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("settings")} className="flex items-center gap-sm px-sm py-2 rounded text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined text-[20px]" style={{fontVariationSettings: "'FILL' 1"}}>settings</span>
       <span className="font-body-md text-body-md">Settings</span>
       </a>
       </li>
       </ul>
       <div className="mt-auto pt-lg border-t border-outline-variant">
-      <button className="w-full bg-primary-container text-white h-8 rounded font-body-sm text-body-sm flex items-center justify-center gap-sm hover:bg-primary-container/90 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container focus:ring-primary-container outline-none">
+      <button onClick={() => navigateToLead(null)} className="w-full bg-primary-container text-white h-8 rounded font-body-sm text-body-sm flex items-center justify-center gap-sm hover:bg-primary-container/90 transition-colors focus:ring-2 focus:ring-offset-2 focus:ring-offset-surface-container focus:ring-primary-container outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[18px]">add</span>
                       New Lead
                   </button>
@@ -95,7 +100,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       {/* Panel Header */}
       <div className="flex items-center justify-between p-md border-b border-outline-variant bg-surface-container-highest">
       <h2 className="font-h1 text-h1 text-on-surface">Profile</h2>
-      <button aria-label="Close Profile" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus:ring-2 focus:ring-primary-container outline-none">
+      <button onClick={() => navigate("leads")} aria-label="Close Profile" className="h-8 w-8 flex items-center justify-center rounded text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus:ring-2 focus:ring-primary-container outline-none cursor-pointer">
       <span className="material-symbols-outlined text-[20px]">close</span>
       </button>
       </div>
@@ -104,7 +109,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       {/* Identity Section */}
       <div className="flex flex-col items-center text-center">
       <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary-container mb-md relative">
-      <img alt="Alex Operator" className="w-full h-full object-cover" data-alt="A close-up professional headshot of a male operator named Alex. The setting is a dark, modern corporate environment with subtle blue lighting reflecting off the minimal background, fitting a sleek industrial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwb90uOwr6jrb81uO7e4TbKUHF_gFXBcvJmeo7JYV0kG_aIkDX927cKlElx_jsQza0lcbXa2SokJuWlVvUDg19-J4aAOHqs19qrifMjHNESAnscTidhKVbQSiQEVw82-e4v3oVTi2Ttm8Yd47YbcPAtn4BGcVlRWo-GzgITLCsa6mEBR5tCZxYUaAUAhhlc7szk0PLdEo6ROpYfTo7Af2K5O01c9RlYSx8yDpJwAxUlMA1Hec-v46ThhPBtFI2OFFrHdJzUKKHvMl-" />
+      <img alt="Alex Operator" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwb90uOwr6jrb81uO7e4TbKUHF_gFXBcvJmeo7JYV0kG_aIkDX927cKlElx_jsQza0lcbXa2SokJuWlVvUDg19-J4aAOHqs19qrifMjHNESAnscTidhKVbQSiQEVw82-e4v3oVTi2Ttm8Yd47YbcPAtn4BGcVlRWo-GzgITLCsa6mEBR5tCZxYUaAUAhhlc7szk0PLdEo6ROpYfTo7Af2K5O01c9RlYSx8yDpJwAxUlMA1Hec-v46ThhPBtFI2OFFrHdJzUKKHvMl-" />
       </div>
       <h3 className="font-h2 text-h2 text-on-surface">Alex Operator</h3>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Lead Agronomist</p>
@@ -145,7 +150,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Alert on pipeline entry</span>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" value="" />
+      <input checked={newLeadToggle} onChange={e => setNewLeadToggle(e.target.checked)} className="sr-only peer" type="checkbox" />
       <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
       </label>
       </div>
@@ -156,7 +161,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       <span className="font-body-sm text-body-sm text-on-surface-variant text-[11px]">Critical system alerts</span>
       </div>
       <label className="relative inline-flex items-center cursor-pointer">
-      <input checked={true} className="sr-only peer" type="checkbox" value="" />
+      <input checked={actionToggle} onChange={e => setActionToggle(e.target.checked)} className="sr-only peer" type="checkbox" />
       <div className="w-9 h-5 bg-[#475569] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary-container rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#16A34A]"></div>
       </label>
       </div>
@@ -164,7 +169,7 @@ export function ProfilePanel(props: ProfilePanelProps) {
       </div>
       {/* Panel Footer */}
       <div className="p-md border-t border-outline-variant bg-surface-container-highest flex gap-sm">
-      <button className="flex-1 h-8 bg-transparent border border-outline-variant text-on-surface font-body-sm text-body-sm rounded hover:bg-surface-variant transition-colors focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none flex items-center justify-center gap-xs">
+      <button onClick={() => navigate("leads")} className="flex-1 h-8 bg-transparent border border-outline-variant text-on-surface font-body-sm text-body-sm rounded hover:bg-surface-variant transition-colors focus:ring-2 focus:ring-primary-container focus:border-primary-container outline-none flex items-center justify-center gap-xs cursor-pointer">
       <span className="material-symbols-outlined text-[16px]">logout</span>
                           Sign Out
                       </button>

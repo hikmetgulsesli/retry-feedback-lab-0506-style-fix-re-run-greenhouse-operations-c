@@ -1,0 +1,5 @@
+.card-base {
+  background-color: var(--color-surface-container);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-lg);
+}

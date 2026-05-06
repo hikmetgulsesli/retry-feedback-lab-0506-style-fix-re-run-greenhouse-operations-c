@@ -8,10 +8,13 @@
 // 4. Replace placeholder data with props/state
 
 import { useState } from "react";
+import { useAppContext } from "../contexts/AppContext";
 
 interface EmptyStateProps {}
 
 export function EmptyState(props: EmptyStateProps) {
+  const { navigate, navigateToLead } = useAppContext();
+
   return (
     <>
       {/* SideNavBar (Web) */}
@@ -20,38 +23,38 @@ export function EmptyState(props: EmptyStateProps) {
       <h1 className="font-display text-display text-primary dark:text-primary tracking-tight">Setfarm Greenhouse</h1>
       <p className="font-body-sm text-body-sm text-on-surface-variant mt-xs">Operation Console</p>
       </div>
-      <button className="bg-primary-container text-on-primary-container font-h2 text-h2 py-sm px-md rounded-DEFAULT flex items-center justify-center gap-sm w-full mb-xl hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none focus:ring-offset-2 focus:ring-offset-surface-container">
+      <button onClick={() => navigateToLead(null)} className="bg-primary-container text-on-primary-container font-h2 text-h2 py-sm px-md rounded-DEFAULT flex items-center justify-center gap-sm w-full mb-xl hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none focus:ring-offset-2 focus:ring-offset-surface-container cursor-pointer">
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 0"}}>add</span>
                   New Lead
               </button>
       <ul className="flex flex-col gap-sm flex-1">
       <li>
-      <a className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+      <a onClick={() => navigate("leads")} className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-primary dark:text-primary font-bold border-r-2 border-primary bg-surface-container-high hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>group</span>
                           Leads
                       </a>
       </li>
       <li>
-      <a className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+      <a onClick={() => navigate("pipeline")} className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 0"}}>account_tree</span>
                           Pipeline
                       </a>
       </li>
       <li>
-      <a className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+      <a onClick={() => navigate("insights")} className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 0"}}>monitoring</span>
                           Insights
                       </a>
       </li>
       <li>
-      <a className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+      <a onClick={() => navigate("settings")} className="flex items-center gap-md px-sm py-sm rounded-DEFAULT text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 0"}}>settings</span>
                           Settings
                       </a>
       </li>
       </ul>
       <div className="mt-auto pt-lg border-t border-outline-variant px-sm flex items-center gap-md">
-      <img alt="User Avatar" className="w-8 h-8 rounded-full border border-outline-variant" data-alt="A small, circular profile picture of an operator with a serious, professional demeanor, set against a dark, minimal corporate background to match the dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfS5Vnpr78P3MH_NLps6VIwljbfF0LpyFtuXLOpncVHPmH6eEAJXpM-UZ-HkBQJ8AYxgnBoapYpEOuBt0bWeRYyTBoiJ-Fe3nmfNTrwI7VQPJEHRxr4WItFyPRvFSO9V-lw1bSBhxt0RLObwg9wTjHWCFgR1rcS-UNjv9Q7EtXGGphh9SH7jL-ciYuj6uMUucFpoRekeEQzykLU2CM5UonbvN7J7JConbOCGCS2No95hI7rxhAGgCowCx2xQon1MQa45JPkkA44LBy" />
+      <img alt="User Avatar" className="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfS5Vnpr78P3MH_NLps6VIwljbfF0LpyFtuXLOpncVHPmH6eEAJXpM-UZ-HkBQJ8AYxgnBoapYpEOuBt0bWeRYyTBoiJ-Fe3nmfNTrwI7VQPJEHRxr4WItFyPRvFSO9V-lw1bSBhxt0RLObwg9wTjHWCFgR1rcS-UNjv9Q7EtXGGphh9SH7jL-ciYuj6uMUucFpoRekeEQzykLU2CM5UonbvN7J7JConbOCGCS2No95hI7rxhAGgCowCx2xQon1MQa45JPkkA44LBy" />
       <div>
       <p className="font-h2 text-h2 text-on-surface">Operator 01</p>
       <p className="font-body-sm text-body-sm text-on-surface-variant">Active</p>
@@ -72,7 +75,7 @@ export function EmptyState(props: EmptyStateProps) {
       <button className="text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest p-sm rounded-full transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none">
       <span className="material-symbols-outlined">help_outline</span>
       </button>
-      <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant ml-sm" data-alt="A small, circular profile picture of an operator with a serious, professional demeanor, set against a dark, minimal corporate background to match the dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX6flVl4GSdL2iWcjxkCQYGR9ZfrIPmeb0kdWn9kMGMMlyPAY9wuwhvPDxVz5iL2W9geE9LUvtgJTGl7KBTA3cNTaffxAU1G8jbr4TtLb6kIJU_oSHpXkPEloc1wpyKpc_6ygjRavpv4oOiJt9nAcQoaZeol-SvNupbY6d8nGt-AMC91IlSqRgBtYMrmgTOfluUBJeqEAkVGf7hBTS5DheIczf97EKZcEH2BkUqtjd3lMPUg7dpRNn6P73rriegPuFv_NvfnYJGk0x" />
+      <img alt="Operator Profile" className="w-8 h-8 rounded-full border border-outline-variant ml-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX6flVl4GSdL2iWcjxkCQYGR9ZfrIPmeb0kdWn9kMGMMlyPAY9wuwhvPDxVz5iL2W9geE9LUvtgJTGl7KBTA3cNTaffxAU1G8jbr4TtLb6kIJU_oSHpXkPEloc1wpyKpc_6ygjRavpv4oOiJt9nAcQoaZeol-SvNupbY6d8nGt-AMC91IlSqRgBtYMrmgTOfluUBJeqEAkVGf7hBTS5DheIczf97EKZcEH2BkUqtjd3lMPUg7dpRNn6P73rriegPuFv_NvfnYJGk0x" />
       </div>
       </header>
       {/* TopAppBar (Web Toolbar) */}
@@ -102,7 +105,7 @@ export function EmptyState(props: EmptyStateProps) {
       <p className="font-body-md text-body-md text-on-surface-variant mb-xl max-w-sm">
                           Your pipeline is currently empty. Add new prospects to begin tracking and converting them through the greenhouse operational flow.
                       </p>
-      <button className="bg-primary-container text-on-primary-container font-h2 text-h2 h-[32px] px-lg rounded-DEFAULT flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none focus:ring-offset-2 focus:ring-offset-surface-container">
+      <button onClick={() => navigateToLead(null)} className="bg-primary-container text-on-primary-container font-h2 text-h2 h-[32px] px-lg rounded-DEFAULT flex items-center justify-center gap-sm hover:bg-inverse-primary transition-colors focus:ring-2 focus:ring-primary-container focus:outline-none focus:ring-offset-2 focus:ring-offset-surface-container cursor-pointer">
       <span className="material-symbols-outlined text-[18px]">add</span>
                           Create your first lead
                       </button>
@@ -110,21 +113,21 @@ export function EmptyState(props: EmptyStateProps) {
       </main>
       {/* BottomNavBar (Mobile) */}
       <nav className="md:hidden bg-surface-container dark:bg-surface-container border-t border-outline-variant w-full shrink-0 h-16 flex justify-around items-center px-sm pb-safe z-20">
-      <a className="flex flex-col items-center justify-center w-full h-full text-primary dark:text-primary active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("leads")} className="flex flex-col items-center justify-center w-full h-full text-primary dark:text-primary active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <div className="px-lg py-xs rounded-full bg-surface-container-high mb-xs">
       <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>group</span>
       </div>
       <span className="font-label-caps text-label-caps">Leads</span>
       </a>
-      <a className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("pipeline")} className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined mb-xs" style={{fontVariationSettings: "'FILL' 0"}}>account_tree</span>
       <span className="font-label-caps text-label-caps">Pipeline</span>
       </a>
-      <a className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("insights")} className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined mb-xs" style={{fontVariationSettings: "'FILL' 0"}}>monitoring</span>
       <span className="font-label-caps text-label-caps">Insights</span>
       </a>
-      <a className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150" href="#">
+      <a onClick={() => navigate("settings")} className="flex flex-col items-center justify-center w-full h-full text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest active:scale-95 transition-transform duration-150 cursor-pointer" role="button" tabIndex={0}>
       <span className="material-symbols-outlined mb-xs" style={{fontVariationSettings: "'FILL' 0"}}>settings</span>
       <span className="font-label-caps text-label-caps">Settings</span>
       </a>
