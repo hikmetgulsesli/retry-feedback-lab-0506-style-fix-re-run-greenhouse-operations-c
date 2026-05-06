@@ -192,8 +192,8 @@ export function LeadsDashboard(props: LeadsDashboardProps) {
       <div className="bg-surface-container-high border-t border-outline-variant p-sm flex items-center justify-between">
       <span className="font-body-sm text-body-sm text-on-surface-variant px-sm">Showing {filteredLeads.length > 0 ? `1-${filteredLeads.length}` : '0'} of {leads.length}</span>
       <div className="flex items-center gap-xs">
-      <button className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span className="material-symbols-outlined text-[18px]">chevron_left</span></button>
-      <button className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT"><span className="material-symbols-outlined text-[18px]">chevron_right</span></button>
+      <button aria-label="Previous page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT disabled:opacity-50"><span className="material-symbols-outlined text-[18px]">chevron_left</span></button>
+      <button aria-label="Next page" className="p-xs text-on-surface-variant hover:bg-surface-container-highest rounded-DEFAULT"><span className="material-symbols-outlined text-[18px]">chevron_right</span></button>
       </div>
       </div>
       </div>

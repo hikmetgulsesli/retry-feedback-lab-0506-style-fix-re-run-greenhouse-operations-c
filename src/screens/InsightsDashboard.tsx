@@ -82,8 +82,8 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <header className="flex justify-between items-center h-16 px-lg w-full bg-surface-container dark:bg-surface-container border-b border-outline-variant dark:border-outline-variant flat no shadows md:hidden">
       <span className="font-display text-display text-primary dark:text-primary">Setfarm Greenhouse</span>
       <div className="flex gap-sm">
-      <button className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="notifications">notifications</span></button>
-      <button className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="help_outline">help_outline</span></button>
+      <button aria-label="Notifications" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+      <button aria-label="Help" className="p-sm text-on-surface-variant hover:bg-surface-container-highest rounded-full"><span className="material-symbols-outlined" data-icon="help_outline">help_outline</span></button>
       </div>
       </header>
       {/* Dashboard Header */}
@@ -160,7 +160,7 @@ export function InsightsDashboard(props: InsightsDashboardProps) {
       <div className="card-base p-md lg:col-span-2 flex flex-col">
       <div className="flex justify-between items-center mb-md">
       <h2 className="font-h2 text-h2 text-on-surface">Conversion Funnel</h2>
-      <button className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">more_vert</span></button>
+      <button aria-label="More options" className="text-on-surface-variant hover:text-primary transition-colors"><span className="material-symbols-outlined">more_vert</span></button>
       </div>
       <div className="flex-1 relative border-b border-l border-outline-variant flex items-end justify-around pb-sm pt-xl px-sm">
       {/* Simulated Bar Chart */}
